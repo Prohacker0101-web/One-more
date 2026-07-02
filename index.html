@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Varsha Chronicle • Premium Experience</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,6 +30,7 @@
             padding: 0;
             user-select: none;
             -webkit-user-select: none;
+            touch-action: none; /* Prevents default browser panning/scrolling during interaction */
         }
 
         body, html {
@@ -57,7 +58,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, transparent 25%, rgba(0,0,0,0.9) 100%);
+            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.95) 100%);
             z-index: 2;
             pointer-events: none;
         }
@@ -83,8 +84,8 @@
         }
 
         .audio-pill {
-            background: rgba(31, 5, 8, 0.7);
-            border: 1px solid rgba(230, 42, 62, 0.4);
+            background: rgba(31, 5, 8, 0.8);
+            border: 1px solid rgba(230, 42, 62, 0.5);
             padding: 6px 14px;
             border-radius: 30px;
             font-size: 9px;
@@ -117,8 +118,8 @@
             align-items: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-            transform: translateY(40px) scale(1.03);
+            transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+            transform: scale(1.05);
             padding: 30px;
             text-align: center;
         }
@@ -126,7 +127,7 @@
         .scene.active {
             opacity: 1;
             pointer-events: auto;
-            transform: translateY(0) scale(1);
+            transform: scale(1);
         }
 
         .statement-box {
@@ -149,9 +150,9 @@
             line-height: 1.6;
             color: var(--text-pure);
             font-style: italic;
-            text-shadow: 0 0 30px rgba(230, 42, 62, 0.2);
+            text-shadow: 0 0 40px rgba(230, 42, 62, 0.3);
         }
-        @media(max-width: 768px) { .natural-prose { font-size: 1.6rem; } }
+        @media(max-width: 768px) { .natural-prose { font-size: 1.55rem; } }
 
         .signature-author {
             font-family: var(--font-cinzel);
@@ -160,7 +161,6 @@
             color: var(--luxury-gold);
             margin-top: 40px;
             text-transform: uppercase;
-            animation: breathe 3s infinite ease-in-out;
         }
 
         .gate-input-wrapper { margin-top: 30px; }
@@ -205,7 +205,6 @@
         .trigger-emoji {
             font-size: 2.2rem;
             filter: drop-shadow(0 0 15px rgba(230, 42, 62, 0.6));
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .control-label {
@@ -217,11 +216,11 @@
             font-weight: 500;
         }
 
-        /* Highly Advanced Full Swipe Track */
+        /* Fixed Full Swipe Track Core Logic */
         .slide-track {
-            width: 240px;
-            height: 48px;
-            background: rgba(31, 5, 8, 0.6);
+            width: 260px;
+            height: 52px;
+            background: rgba(31, 5, 8, 0.7);
             border: 1px solid rgba(243, 175, 183, 0.25);
             border-radius: 30px;
             margin-top: 50px;
@@ -231,18 +230,18 @@
         }
 
         .slide-handle {
-            width: 44px;
-            height: 44px;
+            width: 46px;
+            height: 46px;
             background: var(--text-pure);
             border-radius: 50%;
             position: absolute;
-            top: 1px;
+            top: 2px;
             left: 2px;
             cursor: grab;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 0 15px rgba(230, 42, 62, 0.4);
+            box-shadow: 0 0 15px rgba(230, 42, 62, 0.5);
             z-index: 5;
         }
 
@@ -258,7 +257,7 @@
             text-transform: uppercase;
             color: var(--luxury-gold);
             pointer-events: none;
-            padding-left: 30px;
+            padding-left: 35px;
             z-index: 1;
         }
 
@@ -278,11 +277,6 @@
             z-index: 10000;
         }
         .toast-notice.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-        @keyframes breathe {
-            0%, 100% { opacity: 0.6; transform: scale(0.98); }
-            50% { opacity: 1; transform: scale(1); }
-        }
     </style>
 </head>
 <body>
@@ -291,7 +285,7 @@
     <div class="vignette-overlay"></div>
 
     <div class="premium-header">
-        <div class="luxury-branding">MEMENTO v3.0</div>
+        <div class="luxury-branding">MEMENTO v3.1</div>
         <button class="audio-pill" id="playbackBtn" style="display:none;">
             <span>🎹 Ambient Pure Piano</span>
         </button>
@@ -324,7 +318,7 @@
             </div>
         </div>
 
-        <div class="scene" id="sc-2" ondblclick="triggerExplosionSequence(3, 'wave', event)">
+        <div class="scene" id="sc-2" dblclick-marker="true">
             <div class="statement-box">
                 <div class="scene-number">Chronicle II • Transparency</div>
                 <p class="natural-prose">"Pata hai, mujhe sabse acchi cheez kya lagti hai? Tumhare saamne mujhe sochna nahi padta. Main jaisa hoon, ajeeb ya bikhra hua, tum bas bina judge kiye sunti ho."</p>
@@ -360,7 +354,7 @@
             </div>
         </div>
 
-        <div class="scene" id="sc-5" ondblclick="triggerExplosionSequence(6, 'wave', event)">
+        <div class="scene" id="sc-5" dblclick-marker="true">
             <div class="statement-box">
                 <div class="scene-number">Chronicle V • Safe Haven</div>
                 <p class="natural-prose">"Hum dono me hazar kamiya ho sakti hain, par jab hum sath hote hain, toh wo kamiyan choti lagne lagti hain. Wo comfort sabse bada hai."</p>
@@ -396,7 +390,7 @@
             </div>
         </div>
 
-        <div class="scene" id="sc-8" ondblclick="triggerExplosionSequence(9, 'wave', event)">
+        <div class="scene" id="sc-8" dblclick-marker="true">
             <div class="statement-box">
                 <div class="scene-number">Chronicle VIII • Ground Reality</div>
                 <p class="natural-prose">"Main koi bhot bade promises ya asmaan todne ke dawe nahi karunga... par haan, jab tak sath hain, dher saari care aur respect hamesha rahegi."</p>
@@ -427,7 +421,7 @@
                 musicCtx = new ClassObj();
                 lowpassFilter = musicCtx.createBiquadFilter();
                 lowpassFilter.type = 'lowpass';
-                lowpassFilter.frequency.setValueAtTime(290, musicCtx.currentTime); // High Luxury low filter
+                lowpassFilter.frequency.setValueAtTime(290, musicCtx.currentTime); 
             } catch(e){}
         }
 
@@ -513,26 +507,26 @@
                 this.alpha = 1;
                 
                 if(variant === 'sparkle') {
-                    this.speed = Math.random() * 7 + 4;
-                    this.decay = Math.random() * 0.02 + 0.015;
+                    this.speed = Math.random() * 6 + 4;
+                    this.decay = Math.random() * 0.03 + 0.02;
                     this.color = '#ffffff';
-                    this.size = Math.random() * 5 + 2;
-                } else if(variant === 'wave') {
-                    this.speed = Math.random() * 11 + 6;
-                    this.decay = Math.random() * 0.015 + 0.01;
-                    this.color = Math.random() > 0.5 ? '#e62a3e' : '#1f0508';
-                    this.size = Math.random() * 8 + 4;
-                } else { // beam (for sliders)
-                    this.speed = Math.random() * 15 + 8;
-                    this.decay = Math.random() * 0.025 + 0.018;
-                    this.color = '#f3afb7';
                     this.size = Math.random() * 4 + 2;
+                } else if(variant === 'wave') {
+                    this.speed = Math.random() * 9 + 4;
+                    this.decay = Math.random() * 0.02 + 0.015;
+                    this.color = '#e62a3e';
+                    this.size = Math.random() * 6 + 3;
+                } else { // beam (for slider finish)
+                    this.speed = Math.random() * 12 + 6;
+                    this.decay = Math.random() * 0.02 + 0.015;
+                    this.color = '#f3afb7';
+                    this.size = Math.random() * 3 + 1.5;
                 }
             }
             update() {
                 this.x += Math.cos(this.angle) * this.speed;
                 this.y += Math.sin(this.angle) * this.speed;
-                this.speed *= 0.94;
+                this.speed *= 0.95;
                 this.alpha -= this.decay;
             }
             draw() {
@@ -540,20 +534,20 @@
                 ctx.globalAlpha = this.alpha;
                 ctx.beginPath();
                 if(this.variant === 'sparkle') {
-                    // Star Diamond Vectors
+                    // Star Diamond Vectors (No generic heart!)
                     ctx.moveTo(this.x, this.y - this.size);
                     ctx.lineTo(this.x + this.size, this.y);
                     ctx.lineTo(this.x, this.y + this.size);
                     ctx.lineTo(this.x - this.size, this.y);
                 } else if(this.variant === 'wave') {
-                    // Velvet Petal Circles
+                    // Deep Dark Crimson Wave Circular Shards
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
                 } else {
-                    // Gold Dust Squares
-                    ctx.rect(this.x, this.y, this.size*1.5, this.size*1.5);
+                    // Luxury Gold Dust Block Particles
+                    ctx.rect(this.x, this.y, this.size*2, this.size*2);
                 }
                 ctx.fillStyle = this.color;
-                ctx.shadowBlur = 10;
+                ctx.shadowBlur = 15;
                 ctx.shadowColor = this.color;
                 ctx.fill();
                 ctx.restore();
@@ -566,9 +560,8 @@
         function drawFullscreenHeartbeat() {
             if(!runHeartbeatPulse) return;
             
-            // Continuous scale controller logic
-            if(pulseGrowth) { pulseScale += 0.006; if(pulseScale >= 1.15) pulseGrowth = false; }
-            else { pulseScale -= 0.006; if(pulseScale <= 0.95) pulseGrowth = true; }
+            if(pulseGrowth) { pulseScale += 0.005; if(pulseScale >= 1.12) pulseGrowth = false; }
+            else { pulseScale -= 0.005; if(pulseScale <= 0.93) pulseGrowth = true; }
 
             ctx.save();
             ctx.translate(canvas.width / 2, canvas.height / 2);
@@ -580,12 +573,12 @@
             ctx.bezierCurveTo(-hr/2, -hr, -hr, -hr/3, -hr, 0);
             ctx.bezierCurveTo(-hr, hr/3, -hr/3, hr*2/3, 0, hr);
             ctx.bezierCurveTo(hr/3, hr*2/3, hr, hr/3, hr, 0);
-            ctx.bezierCurveTo(hr, -hr/3, hr/2, -hr, 0, -hr/4);
+            ctx.bezierCurveTo(hr, -hr/3, r=hr/2, -hr, 0, -hr/4);
             
-            ctx.fillStyle = 'rgba(230, 42, 62, 0.05)';
-            ctx.strokeStyle = 'rgba(230, 42, 62, 0.35)';
-            ctx.lineWidth = 3;
-            ctx.shadowBlur = 40;
+            ctx.fillStyle = 'rgba(230, 42, 62, 0.04)';
+            ctx.strokeStyle = 'rgba(230, 42, 62, 0.4)';
+            ctx.lineWidth = 4;
+            ctx.shadowBlur = 50;
             ctx.shadowColor = '#e62a3e';
             ctx.fill();
             ctx.stroke();
@@ -593,8 +586,13 @@
         }
 
         function canvasAnimationLoop() {
-            ctx.fillStyle = 'rgba(7, 2, 3, 0.35)';
+            // Clears trail properly so customized elements do not blend into heart formats!
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = 'rgba(7, 2, 3, 1)';
+            ctx.globalCompositeOperation = 'destination-over';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.globalCompositeOperation = 'source-over';
 
             dynamicBackgroundArray.forEach(p => { p.update(); p.draw(); });
 
@@ -631,7 +629,6 @@
             nodes.forEach(n => n.classList.remove('active'));
             systemMode = sceneIdx % 2 + 1;
             
-            // Last page setup trigger heartbeat pulse completely
             if(sceneIdx === 9) { runHeartbeatPulse = true; }
 
             setTimeout(() => { nodes[sceneIdx].classList.add('active'); }, 100);
@@ -662,7 +659,24 @@
             print();
         }
 
-        // Hyper-Accurate Slider Physics Core (100% Locked Path Verification)
+        // Global Double Tap Router System for Explicit Custom Triggers
+        let lastTapTime = 0;
+        window.addEventListener('click', function(e) {
+            let activeScene = document.querySelector('.scene.active');
+            if(!activeScene || !activeScene.hasAttribute('dblclick-marker')) return;
+            
+            let currentTime = new Date().getTime();
+            let tapLength = currentTime - lastTapTime;
+            
+            if (tapLength < 300 && tapLength > 0) {
+                // Double tap identified successfully!
+                let nextId = parseInt(activeScene.id.replace('sc-', '')) + 1;
+                triggerExplosionSequence(nextId, 'wave', e);
+            }
+            lastTapTime = currentTime;
+        });
+
+        // Fixed Full Track Slider Physics Core Mechanics 
         function registerSliderComponent(handleId, trackId, targetSceneIdx) {
             const knob = document.getElementById(handleId);
             const track = document.getElementById(trackId);
@@ -675,18 +689,20 @@
 
             function move(e) {
                 if(!active) return;
+                if(e.type === "touchmove") e.preventDefault(); // Lock mobile view window shift mechanics!
+
                 let currentX = (e.type === "touchmove") ? e.touches[0].clientX : e.clientX;
                 let trackBox = track.getBoundingClientRect();
-                let computedOffset = currentX - trackBox.left - 22;
+                let computedOffset = currentX - trackBox.left - 23;
 
                 if(computedOffset < 0) computedOffset = 0;
-                let dynamicLimit = trackBox.width - 46;
+                let dynamicLimit = trackBox.width - 50;
                 if(computedOffset > dynamicLimit) computedOffset = dynamicLimit;
 
                 knob.style.transform = `translateX(${computedOffset}px)`;
 
-                // Strict checkpoint criteria (Requires 95%+ complete path navigation)
-                if(computedOffset >= dynamicLimit - 4) {
+                // Enforced 96%+ Strict Track End Boundary Checkpoint
+                if(computedOffset >= dynamicLimit - 2) {
                     active = false;
                     knob.style.transform = `translateX(0px)`;
                     triggerExplosionSequence(targetSceneIdx, 'beam', e);
@@ -696,14 +712,14 @@
             function end() { active = false; knob.style.transform = `translateX(0px)`; }
 
             knob.addEventListener('mousedown', start);
-            knob.addEventListener('touchstart', start);
+            knob.addEventListener('touchstart', start, {passive: false});
             window.addEventListener('mousemove', move);
-            window.addEventListener('touchmove', move);
+            window.addEventListener('touchmove', move, {passive: false});
             window.addEventListener('mouseup', end);
             window.addEventListener('touchend', end);
         }
 
-        // Initialize high fidelity tracks
+        // Load modules securely
         registerSliderComponent('sliderKnob1', 'sliderContainer1', 4);
         registerSliderComponent('sliderKnob2', 'sliderContainer2', 7);
 
