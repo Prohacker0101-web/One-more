@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Montserrat:wght@200;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght=1,500;1,600&family=Montserrat:wght@200;400;500&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -29,7 +29,7 @@
             padding: 0;
             user-select: none;
             -webkit-user-select: none;
-            touch-action: none; /* Disables all standard browser multi-tap zooms globally */
+            touch-action: none; /* Fully disables browser tap zoom traps */
         }
 
         body, html {
@@ -117,7 +117,7 @@
             align-items: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
             transform: scale(1.02);
             padding: 30px;
             text-align: center;
@@ -215,7 +215,7 @@
             font-weight: 500;
         }
 
-        /* Continuous Hold Progress Outer Ring Indicator */
+        /* Hold Indicator Ring Styles */
         .hold-container {
             width: 74px;
             height: 74px;
@@ -239,7 +239,7 @@
         .hold-progress-svg circle {
             fill: none;
             stroke-width: 3;
-            stroke: rgba(230, 42, 62, 0.2);
+            stroke: rgba(230, 42, 62, 0.15);
         }
 
         .hold-progress-svg circle.bar {
@@ -249,7 +249,7 @@
             transition: stroke-dashoffset 0.1s linear;
         }
 
-        /* Fixed Full Swipe Track Core Logic */
+        /* Slider Mechanical Core CSS */
         .slide-track {
             width: 260px;
             height: 52px;
@@ -318,9 +318,9 @@
     <div class="vignette-overlay"></div>
 
     <div class="premium-header">
-        <div class="luxury-branding">MEMENTO v3.5</div>
+        <div class="luxury-branding">MEMENTO v4.0</div>
         <button class="audio-pill" id="playbackBtn" style="display:none;">
-            <span>🎹 Nocturne Lofi Piano</span>
+            <span>🎹 Emotional Heart Lofi</span>
         </button>
     </div>
 
@@ -344,7 +344,7 @@
                 <div class="scene-number">Chronicle I • The Dawn</div>
                 <p class="natural-prose" id="typewriterTarget"></p>
                 
-                <div class="interactive-anchor" onclick="triggerExplosionSequence(2, 'sparkle', event)">
+                <div class="interactive-anchor" onclick="triggerExplosionSequence(2, 'sparkle')">
                     <div class="trigger-emoji">✨</div>
                     <div class="control-label">Tap the sparkle shard</div>
                 </div>
@@ -381,7 +381,7 @@
                 <div class="scene-number">Chronicle IV • Maturity</div>
                 <p class="natural-prose">"Main sach me life me ab koi faltu ki behes ya arguments nahi chahta. Main chahta hoon hum dono ek dusre ka sukoon banein, headache nahi."</p>
                 
-                <div class="interactive-anchor" onclick="triggerExplosionSequence(5, 'sparkle', event)">
+                <div class="interactive-anchor" onclick="triggerExplosionSequence(5, 'sparkle')">
                     <div class="trigger-emoji">🔮</div>
                     <div class="control-label">Activate the orb</div>
                 </div>
@@ -418,7 +418,7 @@
                 <div class="scene-number">Chronicle VII • Grounding</div>
                 <p class="natural-prose">"Duniya me bohot shor hai, par tumse baat karke aisa lagta hai jaise sab kuch dheeema ho gaya aur sirf ek sach bacha hai."</p>
                 
-                <div class="interactive-anchor" onclick="triggerExplosionSequence(8, 'sparkle', event)">
+                <div class="interactive-anchor" onclick="triggerExplosionSequence(8, 'sparkle')">
                     <div class="trigger-emoji">💫</div>
                     <div class="control-label">Tap the shooting star</div>
                 </div>
@@ -457,7 +457,7 @@
                 musicCtx = new ClassObj();
                 lowpassFilter = musicCtx.createBiquadFilter();
                 lowpassFilter.type = 'lowpass';
-                lowpassFilter.frequency.setValueAtTime(260, musicCtx.currentTime); // Darker lofi spectrum cut
+                lowpassFilter.frequency.setValueAtTime(240, musicCtx.currentTime); // Heavier sad cut spectrum
             } catch(e){}
         }
 
@@ -468,7 +468,7 @@
                 osc.type = 'triangle'; 
                 osc.frequency.setValueAtTime(pitch, musicCtx.currentTime + delay);
                 amp.gain.setValueAtTime(0, musicCtx.currentTime + delay);
-                amp.gain.linearRampToValueAtTime(gainVal / frequencies.length, musicCtx.currentTime + delay + 1.2);
+                amp.gain.linearRampToValueAtTime(gainVal / frequencies.length, musicCtx.currentTime + delay + 1.4);
                 amp.gain.exponentialRampToValueAtTime(0.0001, musicCtx.currentTime + delay + len);
                 osc.connect(amp); amp.connect(lowpassFilter); lowpassFilter.connect(musicCtx.destination);
                 osc.start(musicCtx.currentTime + delay); osc.stop(musicCtx.currentTime + delay + len);
@@ -477,10 +477,10 @@
 
         function audioLoop() {
             if(!isAudioRunning) return;
-            // Emotional Minor Scale Romantic Chord Progressions (New Melancholic Lofi Vibes)
-            triggerSoftPianoChord([146.83, 196.00, 233.08, 293.66], 0.0, 6.0, 0.22); // G Minor Deep Chord
-            triggerSoftPianoChord([130.81, 164.81, 196.00, 261.63], 6.5, 6.0, 0.18); // C Major Low Octave
-            loopTracker = setTimeout(audioLoop, 13000);
+            // Fully re-tuned Melancholic Minor Progressions (Sad Lofi Romantic Piano chords)
+            triggerSoftPianoChord([138.59, 164.81, 207.65, 277.18], 0.0, 6.5, 0.25); // C# Minor Deep chord
+            triggerSoftPianoChord([116.54, 146.83, 185.00, 233.08], 7.0, 6.5, 0.20); // A# Minor Base chord
+            loopTracker = setTimeout(audioLoop, 14000);
         }
 
         function bootUpAudio() {
@@ -521,7 +521,7 @@
                 this.x = Math.random() * canvas.width;
                 this.y = anywhere ? (Math.random() * canvas.height) : (canvas.height + 15);
                 this.size = Math.random() * 2 + 0.6;
-                this.speedY = Math.random() * 0.22 + 0.06;
+                this.speedY = Math.random() * 0.2 + 0.05;
                 this.alpha = Math.random() * 0.3 + 0.1;
             }
             update() {
@@ -540,26 +540,26 @@
             constructor(variant) {
                 this.variant = variant;
                 this.alpha = 1;
-                // Spawns everywhere on the screen organically instead of single coordinates
+                // Forced random distributions over entire screen area layout
                 this.x = Math.random() * canvas.width;
-                this.y = Math.random() * (canvas.height * 0.6) - 20; 
-                this.speedY = Math.random() * 3 + 2;
-                this.speedX = Math.sin(Math.random() * Math.PI) * 1.5;
-                this.rotation = Math.random() * Math.PI;
-                this.rotSpeed = Math.random() * 0.02 - 0.01;
+                this.y = Math.random() * (canvas.height * 0.85); 
+                this.speedY = Math.random() * 2.5 + 1.5;
+                this.speedX = (Math.random() - 0.5) * 2.5;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotSpeed = (Math.random() - 0.5) * 0.03;
                 
                 if(variant === 'sparkle') {
-                    this.decay = Math.random() * 0.015 + 0.01;
-                    this.color = '#ffffff';
-                    this.size = Math.random() * 5 + 2.5;
-                } else if(variant === 'wave') { // Velvet Rose Petals
                     this.decay = Math.random() * 0.012 + 0.008;
-                    this.color = Math.random() > 0.4 ? '#e62a3e' : '#9e1b29';
-                    this.size = Math.random() * 9 + 4;
-                } else { // Golden dust track beams
-                    this.decay = Math.random() * 0.02 + 0.012;
+                    this.color = '#ffffff';
+                    this.size = Math.random() * 5 + 3;
+                } else if(variant === 'wave') { // Velvet Rose Petals
+                    this.decay = Math.random() * 0.01 + 0.006;
+                    this.color = Math.random() > 0.5 ? '#e62a3e' : '#a81928';
+                    this.size = Math.random() * 10 + 5;
+                } else { // Luxury slider beams
+                    this.decay = Math.random() * 0.018 + 0.01;
                     this.color = '#f3afb7';
-                    this.size = Math.random() * 3 + 1.5;
+                    this.size = Math.random() * 3 + 2;
                 }
             }
             update() {
@@ -577,21 +577,21 @@
                 ctx.beginPath();
                 
                 if(this.variant === 'sparkle') {
-                    // Geometric Diamond Shard Stars
+                    // Perfect Diamond Shard Vectors
                     ctx.moveTo(0, -this.size);
                     ctx.lineTo(this.size, 0);
                     ctx.lineTo(0, this.size);
                     ctx.lineTo(-this.size, 0);
                 } else if(this.variant === 'wave') {
-                    // Soft Cinematic Asymmetric Rose Petals Vector
-                    ctx.ellipse(0, 0, this.size, this.size * 0.6, 0, 0, Math.PI * 2);
+                    // Authentic Asymmetric Falling Rose Petals
+                    ctx.ellipse(0, 0, this.size, this.size * 0.65, 0, 0, Math.PI * 2);
                 } else {
                     ctx.rect(-this.size, -this.size, this.size * 2, this.size * 2);
                 }
                 
                 ctx.fillStyle = this.color;
                 if(this.variant === 'sparkle') {
-                    ctx.shadowBlur = 15;
+                    ctx.shadowBlur = 20;
                     ctx.shadowColor = '#ffffff';
                 }
                 ctx.fill();
@@ -617,125 +617,4 @@
             ctx.bezierCurveTo(-hr/2, -hr, -hr, -hr/3, -hr, 0);
             ctx.bezierCurveTo(-hr, hr/3, -hr/3, hr*2/3, 0, hr);
             ctx.bezierCurveTo(hr/3, hr*2/3, hr, hr/3, hr, 0);
-            ctx.bezierCurveTo(hr, -hr/3, hr/2, -hr, 0, -hr/4);
-            
-            ctx.fillStyle = 'rgba(230, 42, 62, 0.04)';
-            ctx.strokeStyle = 'rgba(230, 42, 62, 0.35)';
-            ctx.lineWidth = 4;
-            ctx.shadowBlur = 50;
-            ctx.shadowColor = '#e62a3e';
-            ctx.fill();
-            ctx.stroke();
-            ctx.restore();
-        }
-
-        function canvasAnimationLoop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.fillStyle = 'rgba(7, 2, 3, 1)';
-            ctx.globalCompositeOperation = 'destination-over';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.globalCompositeOperation = 'source-over';
-
-            dynamicBackgroundArray.forEach(p => { p.update(); p.draw(); });
-
-            for (let i = particlesPool.length - 1; i >= 0; i--) {
-                particlesPool[i].update();
-                particlesPool[i].draw();
-                if(particlesPool[i].alpha <= 0) particlesPool.splice(i, 1);
-            }
-
-            drawFullscreenHeartbeat();
-            requestAnimationFrame(canvasAnimationLoop);
-        }
-        requestAnimationFrame(canvasAnimationLoop);
-    </script>
-
-    <script>
-        // Completely rewritten real-world organic text string for Chronicle I
-        const freshNaturalProse = "Varsha, pata nahi log pyaar ko kitna complicate kyun karte hain... par mere liye tumhara sath hona hi sabse saccha comfort hai. Jab bhi tum thoda sa hasti ho na ya mujhse ladti ho, lagta hai duniya ka saara shor kahin ruk gaya hai. Main bas jaisa hoon waise tumhare sath rehna chahta hoon.";
-
-        function verifyIdentity() {
-            const val = document.getElementById('accessGate').value.trim();
-            if(val === 'Varsha') {
-                bootUpAudio();
-                changeScene(1);
-                setTimeout(fireTypewriter, 600);
-            } else {
-                const alertBox = document.getElementById('errorPrompt');
-                alertBox.classList.add('show');
-                setTimeout(() => alertBox.classList.remove('show'), 3500);
-            }
-        }
-
-        function changeScene(sceneIdx) {
-            const nodes = document.querySelectorAll('.scene');
-            nodes.forEach(n => n.classList.remove('active'));
-            systemMode = sceneIdx % 2 + 1;
-            
-            if(sceneIdx === 9) { runHeartbeatPulse = true; }
-            setTimeout(() => { nodes[sceneIdx].classList.add('active'); }, 100);
-        }
-
-        function triggerExplosionSequence(targetIdx, visualStyle, event) {
-            // Massive full-screen particle distribution loop
-            for(let count=0; count<90; count++) {
-                particlesPool.push(new CustomParticleShard(visualStyle));
-            }
-            setTimeout(() => { changeScene(targetIdx); }, 400);
-        }
-
-        function fireTypewriter() {
-            const container = document.getElementById('typewriterTarget');
-            let pointer = 0; container.innerHTML = "";
-            
-            function print() {
-                if(pointer < freshNaturalProse.length) {
-                    container.innerHTML += freshNaturalProse.charAt(pointer);
-                    pointer++;
-                    let d = freshNaturalProse.charAt(pointer-1) === '.' ? 350 : 25;
-                    setTimeout(print, d);
-                }
-            }
-            print();
-        }
-
-        // Secure Linear Press and Hold Engine to replace problematic mobile double taps
-        function bindHoldGestureComponent(triggerId, barId, targetSceneIdx) {
-            const anchor = document.getElementById(triggerId);
-            const progressBar = document.getElementById(barId);
-            let durationTimer = null;
-            let currentProgress = 0;
-
-            function startHold(e) {
-                e.preventDefault();
-                durationTimer = setInterval(() => {
-                    currentProgress += 4;
-                    if(currentProgress >= 100) currentProgress = 100;
-                    
-                    let offsetValue = 220 - (220 * currentProgress) / 100;
-                    progressBar.style.strokeDashoffset = offsetValue;
-
-                    if(currentProgress >= 100) {
-                        clearInterval(durationTimer);
-                        resetProgress();
-                        triggerExplosionSequence(targetSceneIdx, 'wave', e);
-                    }
-                }, 25);
-            }
-
-            function releaseHold() { clearInterval(durationTimer); resetProgress(); }
-            function resetProgress() { currentProgress = 0; progressBar.style.strokeDashoffset = 220; }
-
-            anchor.addEventListener('mousedown', startHold);
-            anchor.addEventListener('touchstart', startHold);
-            anchor.addEventListener('mouseup', releaseHold);
-            anchor.addEventListener('mouseleave', releaseHold);
-            anchor.addEventListener('touchend', releaseHold);
-        }
-
-        // Fixed Full Track Slider Physics Core Mechanics 
-        function registerSliderComponent(handleId, trackId, targetSceneIdx) {
-            const knob = document.getElementById(handleId);
-            const track = document.getElementById(trackId);
-            let active = false; let startX =
+            ctx.bezierCurveTo(hr, -hr/3, hr/2, -hr, 0
