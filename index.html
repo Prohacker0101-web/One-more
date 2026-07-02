@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <title>The Varsha Chronicle • Premium Experience</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,6 @@
             --text-muted: #bda2a5;
             
             --font-cinzel: 'Cinzel', serif;
-            --font-deco: 'Cinzel Decorative', serif;
             --font-serif: 'Cormorant Garamond', serif;
             --font-sans: 'Montserrat', sans-serif;
         }
@@ -30,7 +29,7 @@
             padding: 0;
             user-select: none;
             -webkit-user-select: none;
-            touch-action: none; /* Prevents default browser panning/scrolling during interaction */
+            touch-action: none; /* Disables all standard browser multi-tap zooms globally */
         }
 
         body, html {
@@ -58,7 +57,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.95) 100%);
+            background: radial-gradient(circle, transparent 15%, rgba(0,0,0,0.95) 100%);
             z-index: 2;
             pointer-events: none;
         }
@@ -84,7 +83,7 @@
         }
 
         .audio-pill {
-            background: rgba(31, 5, 8, 0.8);
+            background: rgba(31, 5, 8, 0.85);
             border: 1px solid rgba(230, 42, 62, 0.5);
             padding: 6px 14px;
             border-radius: 30px;
@@ -119,7 +118,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
-            transform: scale(1.05);
+            transform: scale(1.02);
             padding: 30px;
             text-align: center;
         }
@@ -131,7 +130,7 @@
         }
 
         .statement-box {
-            max-width: 620px;
+            max-width: 640px;
             width: 100%;
         }
 
@@ -216,6 +215,40 @@
             font-weight: 500;
         }
 
+        /* Continuous Hold Progress Outer Ring Indicator */
+        .hold-container {
+            width: 74px;
+            height: 74px;
+            margin-top: 45px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .hold-progress-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .hold-progress-svg circle {
+            fill: none;
+            stroke-width: 3;
+            stroke: rgba(230, 42, 62, 0.2);
+        }
+
+        .hold-progress-svg circle.bar {
+            stroke: var(--crimson-glow);
+            stroke-dasharray: 220;
+            stroke-dashoffset: 220;
+            transition: stroke-dashoffset 0.1s linear;
+        }
+
         /* Fixed Full Swipe Track Core Logic */
         .slide-track {
             width: 260px;
@@ -285,9 +318,9 @@
     <div class="vignette-overlay"></div>
 
     <div class="premium-header">
-        <div class="luxury-branding">MEMENTO v3.1</div>
+        <div class="luxury-branding">MEMENTO v3.5</div>
         <button class="audio-pill" id="playbackBtn" style="display:none;">
-            <span>🎹 Ambient Pure Piano</span>
+            <span>🎹 Nocturne Lofi Piano</span>
         </button>
     </div>
 
@@ -308,7 +341,7 @@
 
         <div class="scene" id="sc-1">
             <div class="statement-box">
-                <div class="scene-number">Chronicle I • Connection</div>
+                <div class="scene-number">Chronicle I • The Dawn</div>
                 <p class="natural-prose" id="typewriterTarget"></p>
                 
                 <div class="interactive-anchor" onclick="triggerExplosionSequence(2, 'sparkle', event)">
@@ -318,15 +351,16 @@
             </div>
         </div>
 
-        <div class="scene" id="sc-2" dblclick-marker="true">
+        <div class="scene" id="sc-2">
             <div class="statement-box">
                 <div class="scene-number">Chronicle II • Transparency</div>
                 <p class="natural-prose">"Pata hai, mujhe sabse acchi cheez kya lagti hai? Tumhare saamne mujhe sochna nahi padta. Main jaisa hoon, ajeeb ya bikhra hua, tum bas bina judge kiye sunti ho."</p>
                 
-                <div class="interactive-anchor" style="cursor: default; margin-top: 6px;">
-                    <div class="trigger-emoji">🍷</div>
-                    <div class="control-label">Double Tap anywhere on screen</div>
+                <div class="hold-container" id="holdTrigger1">
+                    <svg class="hold-progress-svg"><circle cx="37" cy="37" r="35" class="bg"></circle><circle cx="37" cy="37" r="35" class="bar" id="holdBar1"></circle></svg>
+                    <div class="trigger-emoji" style="z-index: 10;">🍷</div>
                 </div>
+                <div class="control-label" style="margin-top:15px;">Press & Hold to reveal path</div>
             </div>
         </div>
 
@@ -354,15 +388,16 @@
             </div>
         </div>
 
-        <div class="scene" id="sc-5" dblclick-marker="true">
+        <div class="scene" id="sc-5">
             <div class="statement-box">
                 <div class="scene-number">Chronicle V • Safe Haven</div>
                 <p class="natural-prose">"Hum dono me hazar kamiya ho sakti hain, par jab hum sath hote hain, toh wo kamiyan choti lagne lagti hain. Wo comfort sabse bada hai."</p>
                 
-                <div class="interactive-anchor" style="cursor: default; margin-top: 6px;">
-                    <div class="trigger-emoji">🕊️</div>
-                    <div class="control-label">Double tap to pass through</div>
+                <div class="hold-container" id="holdTrigger2">
+                    <svg class="hold-progress-svg"><circle cx="37" cy="37" r="35" class="bg"></circle><circle cx="37" cy="37" r="35" class="bar" id="holdBar2"></circle></svg>
+                    <div class="trigger-emoji" style="z-index: 10;">🕊️</div>
                 </div>
+                <div class="control-label" style="margin-top:15px;">Press & Hold down anchor</div>
             </div>
         </div>
 
@@ -390,15 +425,16 @@
             </div>
         </div>
 
-        <div class="scene" id="sc-8" dblclick-marker="true">
+        <div class="scene" id="sc-8">
             <div class="statement-box">
                 <div class="scene-number">Chronicle VIII • Ground Reality</div>
                 <p class="natural-prose">"Main koi bhot bade promises ya asmaan todne ke dawe nahi karunga... par haan, jab tak sath hain, dher saari care aur respect hamesha rahegi."</p>
                 
-                <div class="interactive-anchor" style="cursor: default; margin-top: 6px;">
-                    <div class="trigger-emoji">🕯️</div>
-                    <div class="control-label">Double tap to ignite</div>
+                <div class="hold-container" id="holdTrigger3">
+                    <svg class="hold-progress-svg"><circle cx="37" cy="37" r="35" class="bg"></circle><circle cx="37" cy="37" r="35" class="bar" id="holdBar3"></circle></svg>
+                    <div class="trigger-emoji" style="z-index: 10;">🕯️</div>
                 </div>
+                <div class="control-label" style="margin-top:15px;">Hold to complete transition</div>
             </div>
         </div>
 
@@ -421,7 +457,7 @@
                 musicCtx = new ClassObj();
                 lowpassFilter = musicCtx.createBiquadFilter();
                 lowpassFilter.type = 'lowpass';
-                lowpassFilter.frequency.setValueAtTime(290, musicCtx.currentTime); 
+                lowpassFilter.frequency.setValueAtTime(260, musicCtx.currentTime); // Darker lofi spectrum cut
             } catch(e){}
         }
 
@@ -429,10 +465,10 @@
             if(!musicCtx) return;
             frequencies.forEach(pitch => {
                 let osc = musicCtx.createOscillator(); let amp = musicCtx.createGain();
-                osc.type = 'triangle';
+                osc.type = 'triangle'; 
                 osc.frequency.setValueAtTime(pitch, musicCtx.currentTime + delay);
                 amp.gain.setValueAtTime(0, musicCtx.currentTime + delay);
-                amp.gain.linearRampToValueAtTime(gainVal / frequencies.length, musicCtx.currentTime + delay + 0.9);
+                amp.gain.linearRampToValueAtTime(gainVal / frequencies.length, musicCtx.currentTime + delay + 1.2);
                 amp.gain.exponentialRampToValueAtTime(0.0001, musicCtx.currentTime + delay + len);
                 osc.connect(amp); amp.connect(lowpassFilter); lowpassFilter.connect(musicCtx.destination);
                 osc.start(musicCtx.currentTime + delay); osc.stop(musicCtx.currentTime + delay + len);
@@ -441,9 +477,10 @@
 
         function audioLoop() {
             if(!isAudioRunning) return;
-            triggerSoftPianoChord([174.61, 220.00, 261.63, 329.63], 0.0, 5.5, 0.18); 
-            triggerSoftPianoChord([196.00, 246.94, 293.66, 392.00], 6.0, 5.5, 0.15); 
-            loopTracker = setTimeout(audioLoop, 12000);
+            // Emotional Minor Scale Romantic Chord Progressions (New Melancholic Lofi Vibes)
+            triggerSoftPianoChord([146.83, 196.00, 233.08, 293.66], 0.0, 6.0, 0.22); // G Minor Deep Chord
+            triggerSoftPianoChord([130.81, 164.81, 196.00, 261.63], 6.5, 6.0, 0.18); // C Major Low Octave
+            loopTracker = setTimeout(audioLoop, 13000);
         }
 
         function bootUpAudio() {
@@ -484,7 +521,7 @@
                 this.x = Math.random() * canvas.width;
                 this.y = anywhere ? (Math.random() * canvas.height) : (canvas.height + 15);
                 this.size = Math.random() * 2 + 0.6;
-                this.speedY = Math.random() * 0.25 + 0.08;
+                this.speedY = Math.random() * 0.22 + 0.06;
                 this.alpha = Math.random() * 0.3 + 0.1;
             }
             update() {
@@ -500,68 +537,75 @@
         }
 
         class CustomParticleShard {
-            constructor(x, y, variant) {
-                this.x = x; this.y = y;
-                this.variant = variant; // 'sparkle', 'wave', 'beam'
-                this.angle = Math.random() * Math.PI * 2;
+            constructor(variant) {
+                this.variant = variant;
                 this.alpha = 1;
+                // Spawns everywhere on the screen organically instead of single coordinates
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * (canvas.height * 0.6) - 20; 
+                this.speedY = Math.random() * 3 + 2;
+                this.speedX = Math.sin(Math.random() * Math.PI) * 1.5;
+                this.rotation = Math.random() * Math.PI;
+                this.rotSpeed = Math.random() * 0.02 - 0.01;
                 
                 if(variant === 'sparkle') {
-                    this.speed = Math.random() * 6 + 4;
-                    this.decay = Math.random() * 0.03 + 0.02;
+                    this.decay = Math.random() * 0.015 + 0.01;
                     this.color = '#ffffff';
-                    this.size = Math.random() * 4 + 2;
-                } else if(variant === 'wave') {
-                    this.speed = Math.random() * 9 + 4;
-                    this.decay = Math.random() * 0.02 + 0.015;
-                    this.color = '#e62a3e';
-                    this.size = Math.random() * 6 + 3;
-                } else { // beam (for slider finish)
-                    this.speed = Math.random() * 12 + 6;
-                    this.decay = Math.random() * 0.02 + 0.015;
+                    this.size = Math.random() * 5 + 2.5;
+                } else if(variant === 'wave') { // Velvet Rose Petals
+                    this.decay = Math.random() * 0.012 + 0.008;
+                    this.color = Math.random() > 0.4 ? '#e62a3e' : '#9e1b29';
+                    this.size = Math.random() * 9 + 4;
+                } else { // Golden dust track beams
+                    this.decay = Math.random() * 0.02 + 0.012;
                     this.color = '#f3afb7';
                     this.size = Math.random() * 3 + 1.5;
                 }
             }
             update() {
-                this.x += Math.cos(this.angle) * this.speed;
-                this.y += Math.sin(this.angle) * this.speed;
-                this.speed *= 0.95;
+                this.y += this.speedY;
+                this.x += this.speedX;
+                this.rotation += this.rotSpeed;
                 this.alpha -= this.decay;
             }
             draw() {
+                if(this.alpha <= 0) return;
                 ctx.save();
                 ctx.globalAlpha = this.alpha;
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
                 ctx.beginPath();
+                
                 if(this.variant === 'sparkle') {
-                    // Star Diamond Vectors (No generic heart!)
-                    ctx.moveTo(this.x, this.y - this.size);
-                    ctx.lineTo(this.x + this.size, this.y);
-                    ctx.lineTo(this.x, this.y + this.size);
-                    ctx.lineTo(this.x - this.size, this.y);
+                    // Geometric Diamond Shard Stars
+                    ctx.moveTo(0, -this.size);
+                    ctx.lineTo(this.size, 0);
+                    ctx.lineTo(0, this.size);
+                    ctx.lineTo(-this.size, 0);
                 } else if(this.variant === 'wave') {
-                    // Deep Dark Crimson Wave Circular Shards
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+                    // Soft Cinematic Asymmetric Rose Petals Vector
+                    ctx.ellipse(0, 0, this.size, this.size * 0.6, 0, 0, Math.PI * 2);
                 } else {
-                    // Luxury Gold Dust Block Particles
-                    ctx.rect(this.x, this.y, this.size*2, this.size*2);
+                    ctx.rect(-this.size, -this.size, this.size * 2, this.size * 2);
                 }
+                
                 ctx.fillStyle = this.color;
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = this.color;
+                if(this.variant === 'sparkle') {
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = '#ffffff';
+                }
                 ctx.fill();
                 ctx.restore();
             }
         }
 
-        for(let i=0; i<40; i++) { dynamicBackgroundArray.push(new AmbientGlitter()); }
+        for(let i=0; i<45; i++) { dynamicBackgroundArray.push(new AmbientGlitter()); }
 
-        // Render Final Heartbeat Pulse Architecture
         function drawFullscreenHeartbeat() {
             if(!runHeartbeatPulse) return;
             
-            if(pulseGrowth) { pulseScale += 0.005; if(pulseScale >= 1.12) pulseGrowth = false; }
-            else { pulseScale -= 0.005; if(pulseScale <= 0.93) pulseGrowth = true; }
+            if(pulseGrowth) { pulseScale += 0.004; if(pulseScale >= 1.1) pulseGrowth = false; }
+            else { pulseScale -= 0.004; if(pulseScale <= 0.94) pulseGrowth = true; }
 
             ctx.save();
             ctx.translate(canvas.width / 2, canvas.height / 2);
@@ -573,10 +617,10 @@
             ctx.bezierCurveTo(-hr/2, -hr, -hr, -hr/3, -hr, 0);
             ctx.bezierCurveTo(-hr, hr/3, -hr/3, hr*2/3, 0, hr);
             ctx.bezierCurveTo(hr/3, hr*2/3, hr, hr/3, hr, 0);
-            ctx.bezierCurveTo(hr, -hr/3, r=hr/2, -hr, 0, -hr/4);
+            ctx.bezierCurveTo(hr, -hr/3, hr/2, -hr, 0, -hr/4);
             
             ctx.fillStyle = 'rgba(230, 42, 62, 0.04)';
-            ctx.strokeStyle = 'rgba(230, 42, 62, 0.4)';
+            ctx.strokeStyle = 'rgba(230, 42, 62, 0.35)';
             ctx.lineWidth = 4;
             ctx.shadowBlur = 50;
             ctx.shadowColor = '#e62a3e';
@@ -586,7 +630,6 @@
         }
 
         function canvasAnimationLoop() {
-            // Clears trail properly so customized elements do not blend into heart formats!
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
             ctx.fillStyle = 'rgba(7, 2, 3, 1)';
@@ -609,7 +652,8 @@
     </script>
 
     <script>
-        const freshNaturalProse = "Varsha, sach bataoon toh jab se tum meri life me aayi ho na, bohot saari cheezein badal gayi hain. Tumhare sath rehna, tumse baaten karna mujhe sach me bohot accha lagta hai. Tum mere liye sirf ek special person nahi ho, balki tum wo insaan ho jiske sath main bina soche jaisa hoon, waisa reh sakta hoon...";
+        // Completely rewritten real-world organic text string for Chronicle I
+        const freshNaturalProse = "Varsha, pata nahi log pyaar ko kitna complicate kyun karte hain... par mere liye tumhara sath hona hi sabse saccha comfort hai. Jab bhi tum thoda sa hasti ho na ya mujhse ladti ho, lagta hai duniya ka saara shor kahin ruk gaya hai. Main bas jaisa hoon waise tumhare sath rehna chahta hoon.";
 
         function verifyIdentity() {
             const val = document.getElementById('accessGate').value.trim();
@@ -630,18 +674,15 @@
             systemMode = sceneIdx % 2 + 1;
             
             if(sceneIdx === 9) { runHeartbeatPulse = true; }
-
             setTimeout(() => { nodes[sceneIdx].classList.add('active'); }, 100);
         }
 
         function triggerExplosionSequence(targetIdx, visualStyle, event) {
-            let cx = event && event.clientX ? event.clientX : window.innerWidth / 2;
-            let cy = event && event.clientY ? event.clientY : window.innerHeight / 2;
-
-            for(let count=0; count<80; count++) {
-                particlesPool.push(new CustomParticleShard(cx, cy, visualStyle));
+            // Massive full-screen particle distribution loop
+            for(let count=0; count<90; count++) {
+                particlesPool.push(new CustomParticleShard(visualStyle));
             }
-            setTimeout(() => { changeScene(targetIdx); }, 300);
+            setTimeout(() => { changeScene(targetIdx); }, 400);
         }
 
         function fireTypewriter() {
@@ -659,73 +700,42 @@
             print();
         }
 
-        // Global Double Tap Router System for Explicit Custom Triggers
-        let lastTapTime = 0;
-        window.addEventListener('click', function(e) {
-            let activeScene = document.querySelector('.scene.active');
-            if(!activeScene || !activeScene.hasAttribute('dblclick-marker')) return;
-            
-            let currentTime = new Date().getTime();
-            let tapLength = currentTime - lastTapTime;
-            
-            if (tapLength < 300 && tapLength > 0) {
-                // Double tap identified successfully!
-                let nextId = parseInt(activeScene.id.replace('sc-', '')) + 1;
-                triggerExplosionSequence(nextId, 'wave', e);
+        // Secure Linear Press and Hold Engine to replace problematic mobile double taps
+        function bindHoldGestureComponent(triggerId, barId, targetSceneIdx) {
+            const anchor = document.getElementById(triggerId);
+            const progressBar = document.getElementById(barId);
+            let durationTimer = null;
+            let currentProgress = 0;
+
+            function startHold(e) {
+                e.preventDefault();
+                durationTimer = setInterval(() => {
+                    currentProgress += 4;
+                    if(currentProgress >= 100) currentProgress = 100;
+                    
+                    let offsetValue = 220 - (220 * currentProgress) / 100;
+                    progressBar.style.strokeDashoffset = offsetValue;
+
+                    if(currentProgress >= 100) {
+                        clearInterval(durationTimer);
+                        resetProgress();
+                        triggerExplosionSequence(targetSceneIdx, 'wave', e);
+                    }
+                }, 25);
             }
-            lastTapTime = currentTime;
-        });
+
+            function releaseHold() { clearInterval(durationTimer); resetProgress(); }
+            function resetProgress() { currentProgress = 0; progressBar.style.strokeDashoffset = 220; }
+
+            anchor.addEventListener('mousedown', startHold);
+            anchor.addEventListener('touchstart', startHold);
+            anchor.addEventListener('mouseup', releaseHold);
+            anchor.addEventListener('mouseleave', releaseHold);
+            anchor.addEventListener('touchend', releaseHold);
+        }
 
         // Fixed Full Track Slider Physics Core Mechanics 
         function registerSliderComponent(handleId, trackId, targetSceneIdx) {
             const knob = document.getElementById(handleId);
             const track = document.getElementById(trackId);
-            let active = false; let startX = 0;
-
-            function start(e) {
-                active = true;
-                startX = (e.type === "touchstart") ? e.touches[0].clientX : e.clientX;
-            }
-
-            function move(e) {
-                if(!active) return;
-                if(e.type === "touchmove") e.preventDefault(); // Lock mobile view window shift mechanics!
-
-                let currentX = (e.type === "touchmove") ? e.touches[0].clientX : e.clientX;
-                let trackBox = track.getBoundingClientRect();
-                let computedOffset = currentX - trackBox.left - 23;
-
-                if(computedOffset < 0) computedOffset = 0;
-                let dynamicLimit = trackBox.width - 50;
-                if(computedOffset > dynamicLimit) computedOffset = dynamicLimit;
-
-                knob.style.transform = `translateX(${computedOffset}px)`;
-
-                // Enforced 96%+ Strict Track End Boundary Checkpoint
-                if(computedOffset >= dynamicLimit - 2) {
-                    active = false;
-                    knob.style.transform = `translateX(0px)`;
-                    triggerExplosionSequence(targetSceneIdx, 'beam', e);
-                }
-            }
-
-            function end() { active = false; knob.style.transform = `translateX(0px)`; }
-
-            knob.addEventListener('mousedown', start);
-            knob.addEventListener('touchstart', start, {passive: false});
-            window.addEventListener('mousemove', move);
-            window.addEventListener('touchmove', move, {passive: false});
-            window.addEventListener('mouseup', end);
-            window.addEventListener('touchend', end);
-        }
-
-        // Load modules securely
-        registerSliderComponent('sliderKnob1', 'sliderContainer1', 4);
-        registerSliderComponent('sliderKnob2', 'sliderContainer2', 7);
-
-        document.getElementById('accessGate').addEventListener('keypress', (e) => {
-            if(e.key === 'Enter') verifyIdentity();
-        });
-    </script>
-</body>
-</html>
+            let active = false; let startX =
