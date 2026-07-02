@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Varsha Chronicle • Premium Experience</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Montserrat:wght@200;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #070203;
+            --wine-deep: #1f0508;
+            --crimson-glow: #e62a3e;
+            --luxury-gold: #f3afb7;
+            --text-pure: #fcf6f7;
+            --text-muted: #bda2a5;
+            
+            --font-cinzel: 'Cinzel', serif;
+            --font-deco: 'Cinzel Decorative', serif;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: var(--bg-dark);
+            font-family: var(--font-sans);
+            color: var(--text-pure);
+        }
+
+        /* Ambient Canvas Setup */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Pure Cinematic Lighting Overlays */
+        .vignette-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.85) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Top Bar Indicators */
+        .premium-header {
+            position: fixed;
+            top: 25px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 100;
+            pointer-events: auto;
+        }
+
+        .luxury-branding {
+            font-family: var(--font-cinzel);
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--luxury-gold);
+            opacity: 0.8;
+        }
+
+        .audio-pill {
+            background: rgba(31, 5, 8, 0.6);
+            border: 1px solid rgba(230, 42, 62, 0.3);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-pure);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+        .audio-pill:hover { border-color: var(--crimson-glow); box-shadow: 0 0 15px rgba(230,42,62,0.3); }
+
+        /* Experience Main Frame */
+        .cinematic-viewport {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+        }
+
+        .scene {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+            transform: translateY(30px) scale(1.02);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .scene.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Typography & Card Aesthetics */
+        .statement-box {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .scene-number {
+            font-family: var(--font-cinzel);
+            font-size: 10px;
+            letter-spacing: 6px;
+            color: var(--crimson-glow);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .natural-prose {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            line-height: 1.6;
+            color: var(--text-pure);
+            font-style: italic;
+            text-shadow: 0 0 30px rgba(230, 42, 62, 0.2);
+        }
+        @media(max-width: 768px) { .natural-prose { font-size: 1.55rem; } }
+
+        .signature-author {
+            font-family: var(--font-cinzel);
+            font-size: 12px;
+            letter-spacing: 4px;
+            color: var(--luxury-gold);
+            margin-top: 30px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        /* Lock Screen Custom Design */
+        .gate-input-wrapper {
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .gate-input {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(243, 175, 183, 0.3);
+            padding: 12px 10px;
+            color: var(--text-pure);
+            font-family: var(--font-cinzel);
+            font-size: 18px;
+            letter-spacing: 3px;
+            text-align: center;
+            width: 220px;
+            outline: none;
+            transition: all 0.4s ease;
+        }
+        .gate-input:focus {
+            border-bottom-color: var(--crimson-glow);
+            box-shadow: 0 10px 20px -10px rgba(230, 42, 62, 0.3);
+        }
+
+        .gate-btn {
+            background: transparent;
+            border: 1px solid var(--luxury-gold);
+            color: var(--luxury-gold);
+            padding: 10px 30px;
+            border-radius: 2px;
+            font-family: var(--font-cinzel);
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .gate-btn:hover { background: var(--text-pure); color: var(--bg-dark); border-color: var(--text-pure); }
+
+        /* Dynamic Control Zones */
+        .interactive-anchor {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .trigger-emoji {
+            font-size: 2rem;
+            filter: drop-shadow(0 0 15px rgba(230, 42, 62, 0.6));
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .interactive-anchor:hover .trigger-emoji { transform: scale(1.2) rotate(5deg); }
+
+        .control-label {
+            font-family: var(--font-sans);
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Custom Sliding Element */
+        .slide-track {
+            width: 200px;
+            height: 44px;
+            background: rgba(31, 5, 8, 0.5);
+            border: 1px solid rgba(243, 175, 183, 0.2);
+            border-radius: 30px;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .slide-handle {
+            width: 40px;
+            height: 40px;
+            background: var(--text-pure);
+            border-radius: 50%;
+            position: absolute;
+            top: 1px;
+            left: 2px;
+            cursor: grab;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            transition: transform 0.1s linear;
+        }
+
+        .slide-text {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--luxury-gold);
+            pointer-events: none;
+            padding-left: 25px;
+        }
+
+        /* Notification Engine */
+        .toast-notice {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--wine-deep);
+            border: 1px solid var(--crimson-glow);
+            padding: 10px 25px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: var(--text-pure);
+            border-radius: 2px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s ease;
+            z-index: 10000;
+        }
+        .toast-notice.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    </style>
+</head>
+<body>
+
+    <canvas id="cinemaUniverse"></canvas>
+    <div class="vignette-overlay"></div>
+
+    <div class="premium-header">
+        <div class="luxury-branding">MEMENTO v2.6</div>
+        <button class="audio-pill" id="playbackBtn" style="display:none;">
+            <span>🎹 Piano Ambient Active</span>
+        </button>
+    </div>
+
+    <div class="toast-notice" id="errorPrompt">Mismatched profile context. Spell exactly 'Varsha'</div>
+
+    <div class="cinematic-viewport">
+
+        <div class="scene active" id="sc-0">
+            <div class="statement-box">
+                <div class="scene-number">A Private Space</div>
+                <h2 class="natural-prose" style="font-family: var(--font-cinzel); font-style: normal; letter-spacing: 1px;">Enter identity to decode the memory lane.</h2>
+                <div class="gate-input-wrapper">
+                    <input type="text" id="accessGate" class="gate-input" placeholder="YOUR NAME" autocomplete="off">
+                </div>
+                <button class="gate-btn" onclick="verifyIdentity()">Unlock Access</button>
+            </div>
+        </div>
+
+        <div class="scene" id="sc-1">
+            <div class="statement-box">
+                <div class="scene-number">Chronicle I • Realization</div>
+                <p class="natural-prose" id="typewriterTarget"></p>
+                
+                <div class="interactive-anchor" onclick="triggerExplosionSequence(2, 1, event)">
+                    <div class="trigger-emoji">✨</div>
+                    <div class="control-label">Tap the sparkle shard</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scene" id="sc-2" ondblclick="triggerExplosionSequence(3, 2, event)">
+            <div class="statement-box">
+                <div class="scene-number">Chronicle II • Acceptance</div>
+                <p class="natural-prose">"Mera gussa, meri baatein, aur kabhi-kabhi bina wajah ka dimag kharab karna... tum bina kisi shikayat ke jhel leti ho. Yeh har koi nahi kar sakta."</p>
+                
+                <div class="interactive-anchor" style="cursor: default; margin-top: 6px;">
+                    <div class="trigger-emoji">🍷</div>
+                    <div class="control-label">Double Tap anywhere on screen</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scene" id="sc-3">
+            <div class="statement-box">
+                <div class="scene-number">Chronicle III • The Calm</div>
+                <p class="natural-prose">"Sach bataoon toh jab tum mere sath hoti ho, tab mujhe duniya ka koi aur jhanjhat ya problem yaad hi nahi rehti. Ek sukoon sa lagta hai."</p>
+                
+                <div class="slide-track" id="sliderContainer1">
+                    <div class="slide-text">Slide to continue</div>
+                    <div class="slide-handle" id="sliderKnob1">🌹</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scene" id="sc-4">
+            <div class="statement-box">
+                <div class="scene-number">Chronicle IV • Absolute Peace</div>
+                <p class="natural-prose">"Main sach me ab hamare beech koi bahas ya ladai nahi chahta. Life bohot choti hai yaarr... main bas chahta hoon hum dono hanste rahein."</p>
+                
+                <div class="interactive-anchor" onclick="triggerExplosionSequence(5, 3, event)">
+                    <div class="trigger-emoji">🔮</div>
+                    <div class="control-label">Activate the orb</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scene" id="sc-5" ondblclick="triggerExplosionSequence(6, 1, event)">
+            <div class="statement-box">
+                <div class="scene-number">Chronicle V • Sanctuary</div>
+                <p class="natural-prose">"Tum mera wo comfortable corner ho jahan mujhe darna nahi padta. Main jaisa hoon, jitna bikhra hua hoon, tum waise hi accept karti ho."</p>
+                
+                <div class="interactive-anchor" style="cursor: default; margin-top: 6px;">
+                    <div class="trigger-emoji">🕊️</div>
+                    <div class="control-label">Double tap to pass through</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scene" id="sc-6">
+            <div class="statement-box">
+                <div class="scene-number">Chronicle VI • Little Favs</div>
+                <p class="natural-prose">"Tumhari wo achanak se bacchon jaisi baatein karna, aur jab tum bina filter ke apne saare dukh-sukh share karti ho... wo moments sabse pyaare hain."</p>
+                
+                <div class="slide-track" id="sliderContainer2">
+                    <div class="slide-text">Swipe to advance</div>
+                    <div class="slide-handle" id="sliderKnob2">🥀</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scene" id="sc-7">
+            <div class="statement-box">
+                <div class="scene-number">Chronicle VII • Anchor</div>
+                <p class="natural-prose">"Jab aas-paas sab kuch galat chal raha hota hai na, toh tumse baat karke lagta hai ki chalo, koi ek jagah toh hai jahan sab perfect hai."</p>
+                
+                <div class="interactive-anchor" onclick="triggerExplosionSequence(8, 2, event)">
+                    <div class="trigger-emoji">💫</div>
+                    <div class="control-label">Tap the shooting star</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scene" id="sc-8" ondblclick="triggerExplosionSequence(9, 3, event)">
+            <div class="statement-box">
+                <div class="scene-number">Chronicle VIII • Promise</div>
+                <p class="natural-prose">"Main aane wale kal ka bada daawa toh nahi karta, par jab tak hum sath hain, main tumhare sath ekdam sach ke sath khada rahunga. Hamesha."</p>
+                
+                <div class="interactive-anchor" style="cursor: default; margin-top: 6px;">
+                    <div class="trigger-emoji">🕯️</div>
+                    <div class="control-label">Double tap to ignite reality</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scene" id="sc-9">
+            <div class="statement-box">
+                <div class="scene-number">Chronicle IX • Closure</div>
+                <p class="natural-prose" style="color: var(--luxury-gold);">"Future kisne dekha hai Varsha? Kisi ko nahi pata kal kya hoga. Par aaj, is moment me, mere dil me tumhare liye sirf fikr, izzat aur saccha pyaar hai."</p>
+                <div class="signature-author">— Sagar</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let musicContext = null;
+        let warmLowpass = null;
+        let audioActive = false;
+        let progressionLoop = null;
+
+        function initializeAudioSystem() {
+            try {
+                const ContextClass = window.AudioContext || window.webkitAudioContext;
+                musicContext = new ContextClass();
+                warmLowpass = musicContext.createBiquadFilter();
+                warmLowpass.type = 'lowpass';
+                warmLowpass.frequency.setValueAtTime(320, musicContext.currentTime); // Deep luxury lofi aesthetic
+            } catch(e) { console.log('Audio contextual guard applied.'); }
+        }
+
+        function triggerSoftPianoChord(pitches, startDelay, duration, gainIntensity) {
+            if(!musicContext) return;
+            pitches.forEach(frequency => {
+                let osc = musicContext.createOscillator();
+                let amp = musicContext.createGain();
+                
+                osc.type = 'triangle'; // Pure soft piano aesthetic tone
+                osc.frequency.setValueAtTime(frequency, musicContext.currentTime + startDelay);
+                
+                amp.gain.setValueAtTime(0, musicContext.currentTime + startDelay);
+                amp.gain.linearRampToValueAtTime(gainIntensity / pitches.length, musicContext.currentTime + startDelay + 0.8);
+                amp.gain.exponentialRampToValueAtTime(0.0001, musicContext.currentTime + startDelay + duration);
+                
+                osc.connect(amp);
+                amp.connect(warmLowpass);
+                warmLowpass.connect(musicContext.destination);
+                
+                osc.start(musicContext.currentTime + startDelay);
+                osc.stop(musicContext.currentTime + startDelay + duration);
+            });
+        }
+
+        function loopLofiChords() {
+            if(!audioActive) return;
+            // High-End Luxury Slow Piano Melodic Progressions
+            triggerSoftPianoChord([174.61, 220.00, 261.63, 329.63], 0.0, 5.0, 0.16); // Fmaj7 Slow Note
+            triggerSoftPianoChord([196.00, 246.94, 293.66, 392.00], 5.5, 5.0, 0.14); // Gmaj7 Dream
+            progressionLoop = setTimeout(loopLofiChords, 11000);
+        }
+
+        function launchBackgroundScore() {
+            if(audioActive) return;
+            if(!musicContext) initializeAudioSystem();
+            if(musicContext && musicContext.state === 'suspended') musicContext.resume();
+            
+            audioActive = true;
+            document.getElementById('playbackBtn').style.display = 'flex';
+            loopLofiChords();
+        }
+
+        document.getElementById('playbackBtn').addEventListener('click', () => {
+            if(musicContext) {
+                if(musicContext.state === 'running') { musicContext.suspend(); document.getElementById('playbackBtn').style.opacity = 0.3; }
+                else { musicContext.resume(); document.getElementById('playbackBtn').style.opacity = 1; }
+            }
+        });
+    </script>
+
+    <script>
+        const canvas = document.getElementById('cinemaUniverse');
+        const ctx = canvas.getContext('2d');
+
+        let continuousGrid = [];
+        let kineticSparks = [];
+        let backgroundStyleMode = 1; // Transitions context per page route
+
+        function syncCanvasDimensions() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', syncCanvasDimensions);
+        syncCanvasDimensions();
+
+        class ParticleNode {
+            constructor() { this.reset(true); }
+            reset(anywhere = false) {
+                this.x = Math.random() * canvas.width;
+                this.y = anywhere ? (Math.random() * canvas.height) : (canvas.height + 15);
+                this.size = Math.random() * 2 + 0.8;
+                this.velY = Math.random() * 0.3 + 0.1;
+                this.velX = Math.sin(Math.random() * 5) * 0.2;
+                this.alpha = Math.random() * 0.4 + 0.1;
+            }
+            update() {
+                this.y -= this.velY;
+                this.x += this.velX;
+                if(this.y < -10) this.reset(false);
+            }
+            draw() {
+                ctx.beginPath();
+                if(backgroundStyleMode === 1) {
+                    // Dark Luxury Crimson Crimson Shards
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+                    ctx.fillStyle = `rgba(230, 42, 62, ${this.alpha})`;
+                } else if(backgroundStyleMode === 2) {
+                    // Rose Gold Glitter Fog
+                    ctx.rect(this.x, this.y, this.size * 1.5, this.size * 1.5);
+                    ctx.fillStyle = `rgba(243, 175, 183, ${this.alpha * 0.8})`;
+                } else {
+                    // Cinematic Dark Ash Smoke
+                    ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI*2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha * 0.3})`;
+                }
+                ctx.fill();
+            }
+        }
+
+        class DynamicExplosionShard {
+            constructor(ex, ey, vectorType) {
+                this.x = ex; this.y = ey;
+                this.type = vectorType;
+                this.angle = Math.random() * Math.PI * 2;
+                this.velocity = Math.random() * 10 + 5;
+                this.life = 1;
+                this.decay = Math.random() * 0.02 + 0.01;
+                this.colorPool = ['#e62a3e', '#f3afb7', '#ffffff', '#5c0c13'];
+                this.shardColor = this.colorPool[Math.floor(Math.random() * this.colorPool.length)];
+                this.radius = Math.random() * 6 + 2;
+            }
+            update() {
+                this.x += Math.cos(this.angle) * this.velocity;
+                this.y += Math.sin(this.angle) * this.velocity;
+                this.velocity *= 0.94;
+                this.life -= this.decay;
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.life;
+                ctx.beginPath();
+                if(this.type === 1) {
+                    // Perfect Diamond Sparkle Crystals
+                    ctx.moveTo(this.x, this.y - this.radius);
+                    ctx.lineTo(this.x + this.radius, this.y);
+                    ctx.lineTo(this.x, this.y + this.radius);
+                    ctx.lineTo(this.x - this.radius, this.y);
+                } else if(this.type === 2) {
+                    // Spherical Luxury Shards
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+                } else {
+                    // Micro Hearts Vectors
+                    let r = this.radius * 1.5;
+                    ctx.translate(this.x, this.y);
+                    ctx.moveTo(0, -r/4);
+                    ctx.bezierCurveTo(-r/2, -r, -r, -r/3, -r, 0);
+                    ctx.bezierCurveTo(-r, r/3, -r/3, r*2/3, 0, r);
+                    ctx.bezierCurveTo(r/3, r*2/3, r, r/3, r, 0);
+                    ctx.bezierCurveTo(r, -r/3, r/2, -r, 0, -r/4);
+                }
+                ctx.fillStyle = this.shardColor;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = this.shardColor;
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        // Init base system loops
+        for(let idx=0; idx < 45; idx++) { continuousGrid.push(new ParticleNode()); }
+
+        function runMainCanvasLoop() {
+            ctx.fillStyle = 'rgba(7, 2, 3, 0.3)'; // Cinematic premium frames transition tail
+            ctx.fillRect(0,0, canvas.width, canvas.height);
+
+            continuousGrid.forEach(node => { node.update(); node.draw(); });
+
+            for (let i = kineticSparks.length - 1; i >= 0; i--) {
+                kineticSparks[i].update();
+                kineticSparks[i].draw();
+                if(kineticSparks[i].life <= 0) kineticSparks.splice(i, 1);
+            }
+            requestAnimationFrame(runMainCanvasLoop);
+        }
+        requestAnimationFrame(runMainCanvasLoop);
+    </script>
+
+    <script>
+        const structuralProse = "Varsha, sach bataoon toh jab se tum meri life me aayi ho na, bohot saari cheezein badal gayi hain. Tumhare sath rehna, tumse baaten karna mujhe sach me bohot accha lagta hai. Tum mere liye sirf ek special person nahi ho, balki tum wo insaan ho jiske sath main bina soche jaisa hoon, waisa reh sakta hoon...";
+
+        function verifyIdentity() {
+            const clientInput = document.getElementById('accessGate').value.trim();
+            if(clientInput === 'Varsha') {
+                launchBackgroundScore();
+                navigateToScene(1);
+                setTimeout(startTypewriterSequence, 600);
+            } else {
+                const notice = document.getElementById('errorPrompt');
+                notice.classList.add('show');
+                setTimeout(() => notice.classList.remove('show'), 3500);
+            }
+        }
+
+        function navigateToScene(sceneId) {
+            const sceneNodes = document.querySelectorAll('.scene');
+            sceneNodes.forEach(node => node.classList.remove('active'));
+            
+            // Randomly transform theme context arrays dynamically based on navigation index route
+            backgroundStyleMode = sceneId % 3 + 1;
+
+            setTimeout(() => {
+                sceneNodes[sceneId].classList.add('active');
+            }, 100);
+        }
+
+        function triggerExplosionSequence(nextTargetId, particleStyle, clickEvent) {
+            let cx = clickEvent ? clickEvent.clientX : window.innerWidth / 2;
+            let cy = clickEvent ? clickEvent.clientY : window.innerHeight / 2;
+
+            // Spawn explosive kinetics instantly
+            for(let blastCount=0; blastCount < 100; blastCount++) {
+                kineticSparks.push(new DynamicExplosionShard(cx, cy, particleStyle));
+            }
+
+            setTimeout(() => {
+                navigateToScene(nextTargetId);
+            }, 300);
+        }
+
+        function startTypewriterSequence() {
+            const terminal = document.getElementById('typewriterTarget');
+            let charIndex = 0;
+            terminal.innerHTML = "";
+            
+            function printNextChar() {
+                if(charIndex < structuralProse.length) {
+                    terminal.innerHTML += structuralProse.charAt(charIndex);
+                    charIndex++;
+                    let parsedDelay = structuralProse.charAt(charIndex-1) === '.' ? 350 : 25;
+                    setTimeout(printNextChar, parsedDelay);
+                }
+            }
+            printNextChar();
+        }
+
+        // Complex Swiping Controller Mechanics for Premium Controls
+        function bindSliderEngine(knobId, trackId, completeTargetScene) {
+            const knob = document.getElementById(knobId);
+            const track = document.getElementById(trackId);
+            let activeDrag = false;
+            let currentX = 0;
+
+            function dragStart(e) {
+                activeDrag = true;
+                currentX = (e.type === "touchstart") ? e.touches[0].clientX : e.clientX;
+            }
+
+            function dragMove(e) {
+                if(!activeDrag) return;
+                let clientX = (e.type === "touchmove") ? e.touches[0].clientX : e.clientX;
+                let boundingBox = track.getBoundingClientRect();
+                let relativePosition = clientX - boundingBox.left - 20;
+
+                if(relativePosition < 0) relativePosition = 0;
+                let limits = boundingBox.width - 44;
+                if(relativePosition > limits) relativePosition = limits;
+
+                knob.style.transform = `translateX(${relativePosition}px)`;
+
+                if(relativePosition >= limits - 5) {
+                    activeDrag = false;
+                    knob.style.transform = `translateX(0px)`;
+                    triggerExplosionSequence(completeTargetScene, 2, e);
+                }
+            }
+
+            function dragEnd() { activeDrag = false; knob.style.transform = `translateX(0px)`; }
+
+            knob.addEventListener('mousedown', dragStart);
+            knob.addEventListener('touchstart', dragStart);
+            window.addEventListener('mousemove', dragMove);
+            window.addEventListener('touchmove', dragMove);
+            window.addEventListener('mouseup', dragEnd);
+            window.addEventListener('touchend', dragEnd);
+        }
+
+        // Initialize drag modules dynamically
+        bindSliderEngine('sliderKnob1', 'sliderContainer1', 4);
+        bindSliderEngine('sliderKnob2', 'sliderContainer2', 7);
+
+        document.getElementById('accessGate').addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') verifyIdentity();
+        });
+    </script>
+</body>
+</html>
