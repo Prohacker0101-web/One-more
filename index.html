@@ -41,7 +41,6 @@
             color: var(--text-pure);
         }
 
-        /* Ambient Canvas Setup */
         canvas {
             position: fixed;
             top: 0;
@@ -52,19 +51,17 @@
             pointer-events: none;
         }
 
-        /* Pure Cinematic Lighting Overlays */
         .vignette-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.85) 100%);
+            background: radial-gradient(circle, transparent 25%, rgba(0,0,0,0.9) 100%);
             z-index: 2;
             pointer-events: none;
         }
 
-        /* Top Bar Indicators */
         .premium-header {
             position: fixed;
             top: 25px;
@@ -74,7 +71,6 @@
             justify-content: space-between;
             padding: 0 30px;
             z-index: 100;
-            pointer-events: auto;
         }
 
         .luxury-branding {
@@ -87,8 +83,8 @@
         }
 
         .audio-pill {
-            background: rgba(31, 5, 8, 0.6);
-            border: 1px solid rgba(230, 42, 62, 0.3);
+            background: rgba(31, 5, 8, 0.7);
+            border: 1px solid rgba(230, 42, 62, 0.4);
             padding: 6px 14px;
             border-radius: 30px;
             font-size: 9px;
@@ -100,11 +96,8 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            transition: all 0.3s ease;
         }
-        .audio-pill:hover { border-color: var(--crimson-glow); box-shadow: 0 0 15px rgba(230,42,62,0.3); }
 
-        /* Experience Main Frame */
         .cinematic-viewport {
             position: relative;
             width: 100%;
@@ -125,7 +118,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-            transform: translateY(30px) scale(1.02);
+            transform: translateY(40px) scale(1.03);
             padding: 30px;
             text-align: center;
         }
@@ -136,9 +129,8 @@
             transform: translateY(0) scale(1);
         }
 
-        /* Typography & Card Aesthetics */
         .statement-box {
-            max-width: 600px;
+            max-width: 620px;
             width: 100%;
         }
 
@@ -153,30 +145,25 @@
 
         .natural-prose {
             font-family: var(--font-serif);
-            font-size: 2rem;
+            font-size: 2.1rem;
             line-height: 1.6;
             color: var(--text-pure);
             font-style: italic;
             text-shadow: 0 0 30px rgba(230, 42, 62, 0.2);
         }
-        @media(max-width: 768px) { .natural-prose { font-size: 1.55rem; } }
+        @media(max-width: 768px) { .natural-prose { font-size: 1.6rem; } }
 
         .signature-author {
             font-family: var(--font-cinzel);
-            font-size: 12px;
-            letter-spacing: 4px;
+            font-size: 14px;
+            letter-spacing: 5px;
             color: var(--luxury-gold);
-            margin-top: 30px;
+            margin-top: 40px;
             text-transform: uppercase;
-            opacity: 0.9;
+            animation: breathe 3s infinite ease-in-out;
         }
 
-        /* Lock Screen Custom Design */
-        .gate-input-wrapper {
-            margin-top: 30px;
-            position: relative;
-        }
-
+        .gate-input-wrapper { margin-top: 30px; }
         .gate-input {
             background: transparent;
             border: none;
@@ -189,12 +176,8 @@
             text-align: center;
             width: 220px;
             outline: none;
-            transition: all 0.4s ease;
         }
-        .gate-input:focus {
-            border-bottom-color: var(--crimson-glow);
-            box-shadow: 0 10px 20px -10px rgba(230, 42, 62, 0.3);
-        }
+        .gate-input:focus { border-bottom-color: var(--crimson-glow); }
 
         .gate-btn {
             background: transparent;
@@ -208,11 +191,8 @@
             text-transform: uppercase;
             margin-top: 25px;
             cursor: pointer;
-            transition: all 0.3s ease;
         }
-        .gate-btn:hover { background: var(--text-pure); color: var(--bg-dark); border-color: var(--text-pure); }
 
-        /* Dynamic Control Zones */
         .interactive-anchor {
             margin-top: 50px;
             display: flex;
@@ -223,11 +203,10 @@
         }
 
         .trigger-emoji {
-            font-size: 2rem;
+            font-size: 2.2rem;
             filter: drop-shadow(0 0 15px rgba(230, 42, 62, 0.6));
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .interactive-anchor:hover .trigger-emoji { transform: scale(1.2) rotate(5deg); }
 
         .control-label {
             font-family: var(--font-sans);
@@ -238,22 +217,22 @@
             font-weight: 500;
         }
 
-        /* Custom Sliding Element */
+        /* Highly Advanced Full Swipe Track */
         .slide-track {
-            width: 200px;
-            height: 44px;
-            background: rgba(31, 5, 8, 0.5);
-            border: 1px solid rgba(243, 175, 183, 0.2);
+            width: 240px;
+            height: 48px;
+            background: rgba(31, 5, 8, 0.6);
+            border: 1px solid rgba(243, 175, 183, 0.25);
             border-radius: 30px;
-            margin-top: 40px;
+            margin-top: 50px;
             position: relative;
             overflow: hidden;
             display: inline-block;
         }
 
         .slide-handle {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             background: var(--text-pure);
             border-radius: 50%;
             position: absolute;
@@ -263,8 +242,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            transition: transform 0.1s linear;
+            box-shadow: 0 0 15px rgba(230, 42, 62, 0.4);
+            z-index: 5;
         }
 
         .slide-text {
@@ -279,10 +258,10 @@
             text-transform: uppercase;
             color: var(--luxury-gold);
             pointer-events: none;
-            padding-left: 25px;
+            padding-left: 30px;
+            z-index: 1;
         }
 
-        /* Notification Engine */
         .toast-notice {
             position: fixed;
             bottom: 40px;
@@ -294,13 +273,16 @@
             font-size: 11px;
             letter-spacing: 1px;
             color: var(--text-pure);
-            border-radius: 2px;
             opacity: 0;
-            pointer-events: none;
             transition: all 0.4s ease;
             z-index: 10000;
         }
         .toast-notice.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        @keyframes breathe {
+            0%, 100% { opacity: 0.6; transform: scale(0.98); }
+            50% { opacity: 1; transform: scale(1); }
+        }
     </style>
 </head>
 <body>
@@ -309,43 +291,43 @@
     <div class="vignette-overlay"></div>
 
     <div class="premium-header">
-        <div class="luxury-branding">MEMENTO v2.6</div>
+        <div class="luxury-branding">MEMENTO v3.0</div>
         <button class="audio-pill" id="playbackBtn" style="display:none;">
-            <span>🎹 Piano Ambient Active</span>
+            <span>🎹 Ambient Pure Piano</span>
         </button>
     </div>
 
-    <div class="toast-notice" id="errorPrompt">Mismatched profile context. Spell exactly 'Varsha'</div>
+    <div class="toast-notice" id="errorPrompt">Context protected. Access only via 'Varsha'</div>
 
     <div class="cinematic-viewport">
 
         <div class="scene active" id="sc-0">
             <div class="statement-box">
-                <div class="scene-number">A Private Space</div>
-                <h2 class="natural-prose" style="font-family: var(--font-cinzel); font-style: normal; letter-spacing: 1px;">Enter identity to decode the memory lane.</h2>
+                <div class="scene-number">A Premium Space</div>
+                <h2 class="natural-prose" style="font-family: var(--font-cinzel); font-style: normal; letter-spacing: 1px;">Verify identity to load the organic path.</h2>
                 <div class="gate-input-wrapper">
                     <input type="text" id="accessGate" class="gate-input" placeholder="YOUR NAME" autocomplete="off">
                 </div>
-                <button class="gate-btn" onclick="verifyIdentity()">Unlock Access</button>
+                <button class="gate-btn" onclick="verifyIdentity()">Unlock Lane</button>
             </div>
         </div>
 
         <div class="scene" id="sc-1">
             <div class="statement-box">
-                <div class="scene-number">Chronicle I • Realization</div>
+                <div class="scene-number">Chronicle I • Connection</div>
                 <p class="natural-prose" id="typewriterTarget"></p>
                 
-                <div class="interactive-anchor" onclick="triggerExplosionSequence(2, 1, event)">
+                <div class="interactive-anchor" onclick="triggerExplosionSequence(2, 'sparkle', event)">
                     <div class="trigger-emoji">✨</div>
                     <div class="control-label">Tap the sparkle shard</div>
                 </div>
             </div>
         </div>
 
-        <div class="scene" id="sc-2" ondblclick="triggerExplosionSequence(3, 2, event)">
+        <div class="scene" id="sc-2" ondblclick="triggerExplosionSequence(3, 'wave', event)">
             <div class="statement-box">
-                <div class="scene-number">Chronicle II • Acceptance</div>
-                <p class="natural-prose">"Mera gussa, meri baatein, aur kabhi-kabhi bina wajah ka dimag kharab karna... tum bina kisi shikayat ke jhel leti ho. Yeh har koi nahi kar sakta."</p>
+                <div class="scene-number">Chronicle II • Transparency</div>
+                <p class="natural-prose">"Pata hai, mujhe sabse acchi cheez kya lagti hai? Tumhare saamne mujhe sochna nahi padta. Main jaisa hoon, ajeeb ya bikhra hua, tum bas bina judge kiye sunti ho."</p>
                 
                 <div class="interactive-anchor" style="cursor: default; margin-top: 6px;">
                     <div class="trigger-emoji">🍷</div>
@@ -356,11 +338,11 @@
 
         <div class="scene" id="sc-3">
             <div class="statement-box">
-                <div class="scene-number">Chronicle III • The Calm</div>
-                <p class="natural-prose">"Sach bataoon toh jab tum mere sath hoti ho, tab mujhe duniya ka koi aur jhanjhat ya problem yaad hi nahi rehti. Ek sukoon sa lagta hai."</p>
+                <div class="scene-number">Chronicle III • The Unwind</div>
+                <p class="natural-prose">"Mera kaisa bhi bura ya hectic din ho, jab tumse baat hoti hai na, toh aisa lagta hai saari tension thodi der ke liye chup ho gayi hai."</p>
                 
                 <div class="slide-track" id="sliderContainer1">
-                    <div class="slide-text">Slide to continue</div>
+                    <div class="slide-text">Slide completely to move</div>
                     <div class="slide-handle" id="sliderKnob1">🌹</div>
                 </div>
             </div>
@@ -368,20 +350,20 @@
 
         <div class="scene" id="sc-4">
             <div class="statement-box">
-                <div class="scene-number">Chronicle IV • Absolute Peace</div>
-                <p class="natural-prose">"Main sach me ab hamare beech koi bahas ya ladai nahi chahta. Life bohot choti hai yaarr... main bas chahta hoon hum dono hanste rahein."</p>
+                <div class="scene-number">Chronicle IV • Maturity</div>
+                <p class="natural-prose">"Main sach me life me ab koi faltu ki behes ya arguments nahi chahta. Main chahta hoon hum dono ek dusre ka sukoon banein, headache nahi."</p>
                 
-                <div class="interactive-anchor" onclick="triggerExplosionSequence(5, 3, event)">
+                <div class="interactive-anchor" onclick="triggerExplosionSequence(5, 'sparkle', event)">
                     <div class="trigger-emoji">🔮</div>
                     <div class="control-label">Activate the orb</div>
                 </div>
             </div>
         </div>
 
-        <div class="scene" id="sc-5" ondblclick="triggerExplosionSequence(6, 1, event)">
+        <div class="scene" id="sc-5" ondblclick="triggerExplosionSequence(6, 'wave', event)">
             <div class="statement-box">
-                <div class="scene-number">Chronicle V • Sanctuary</div>
-                <p class="natural-prose">"Tum mera wo comfortable corner ho jahan mujhe darna nahi padta. Main jaisa hoon, jitna bikhra hua hoon, tum waise hi accept karti ho."</p>
+                <div class="scene-number">Chronicle V • Safe Haven</div>
+                <p class="natural-prose">"Hum dono me hazar kamiya ho sakti hain, par jab hum sath hote hain, toh wo kamiyan choti lagne lagti hain. Wo comfort sabse bada hai."</p>
                 
                 <div class="interactive-anchor" style="cursor: default; margin-top: 6px;">
                     <div class="trigger-emoji">🕊️</div>
@@ -392,11 +374,11 @@
 
         <div class="scene" id="sc-6">
             <div class="statement-box">
-                <div class="scene-number">Chronicle VI • Little Favs</div>
-                <p class="natural-prose">"Tumhari wo achanak se bacchon jaisi baatein karna, aur jab tum bina filter ke apne saare dukh-sukh share karti ho... wo moments sabse pyaare hain."</p>
+                <div class="scene-number">Chronicle VI • Little Habits</div>
+                <p class="natural-prose">"Tumhari wo achanak se dher saari baatein karna aur chhoti chhoti cheezon par khush hona... mujhe andar tak khush kar deta hai."</p>
                 
                 <div class="slide-track" id="sliderContainer2">
-                    <div class="slide-text">Swipe to advance</div>
+                    <div class="slide-text">Full swipe to load data</div>
                     <div class="slide-handle" id="sliderKnob2">🥀</div>
                 </div>
             </div>
@@ -404,32 +386,32 @@
 
         <div class="scene" id="sc-7">
             <div class="statement-box">
-                <div class="scene-number">Chronicle VII • Anchor</div>
-                <p class="natural-prose">"Jab aas-paas sab kuch galat chal raha hota hai na, toh tumse baat karke lagta hai ki chalo, koi ek jagah toh hai jahan sab perfect hai."</p>
+                <div class="scene-number">Chronicle VII • Grounding</div>
+                <p class="natural-prose">"Duniya me bohot shor hai, par tumse baat karke aisa lagta hai jaise sab kuch dheeema ho gaya aur sirf ek sach bacha hai."</p>
                 
-                <div class="interactive-anchor" onclick="triggerExplosionSequence(8, 2, event)">
+                <div class="interactive-anchor" onclick="triggerExplosionSequence(8, 'sparkle', event)">
                     <div class="trigger-emoji">💫</div>
                     <div class="control-label">Tap the shooting star</div>
                 </div>
             </div>
         </div>
 
-        <div class="scene" id="sc-8" ondblclick="triggerExplosionSequence(9, 3, event)">
+        <div class="scene" id="sc-8" ondblclick="triggerExplosionSequence(9, 'wave', event)">
             <div class="statement-box">
-                <div class="scene-number">Chronicle VIII • Promise</div>
-                <p class="natural-prose">"Main aane wale kal ka bada daawa toh nahi karta, par jab tak hum sath hain, main tumhare sath ekdam sach ke sath khada rahunga. Hamesha."</p>
+                <div class="scene-number">Chronicle VIII • Ground Reality</div>
+                <p class="natural-prose">"Main koi bhot bade promises ya asmaan todne ke dawe nahi karunga... par haan, jab tak sath hain, dher saari care aur respect hamesha rahegi."</p>
                 
                 <div class="interactive-anchor" style="cursor: default; margin-top: 6px;">
                     <div class="trigger-emoji">🕯️</div>
-                    <div class="control-label">Double tap to ignite reality</div>
+                    <div class="control-label">Double tap to ignite</div>
                 </div>
             </div>
         </div>
 
         <div class="scene" id="sc-9">
             <div class="statement-box">
-                <div class="scene-number">Chronicle IX • Closure</div>
-                <p class="natural-prose" style="color: var(--luxury-gold);">"Future kisne dekha hai Varsha? Kisi ko nahi pata kal kya hoga. Par aaj, is moment me, mere dil me tumhare liye sirf fikr, izzat aur saccha pyaar hai."</p>
+                <div class="scene-number">Chronicle IX • Reality</div>
+                <p class="natural-prose" style="color: var(--luxury-gold);">"Future kisne dekha hai Varsha? Kisi ko nahi pata kal hum kahan honge. Par aaj, is moment me, mere dil me tumhare liye bhot sacchi jagah hai."</p>
                 <div class="signature-author">— Sagar</div>
             </div>
         </div>
@@ -437,65 +419,52 @@
     </div>
 
     <script>
-        let musicContext = null;
-        let warmLowpass = null;
-        let audioActive = false;
-        let progressionLoop = null;
+        let musicCtx = null; let lowpassFilter = null; let isAudioRunning = false; let loopTracker = null;
 
-        function initializeAudioSystem() {
+        function prepareAudioSystem() {
             try {
-                const ContextClass = window.AudioContext || window.webkitAudioContext;
-                musicContext = new ContextClass();
-                warmLowpass = musicContext.createBiquadFilter();
-                warmLowpass.type = 'lowpass';
-                warmLowpass.frequency.setValueAtTime(320, musicContext.currentTime); // Deep luxury lofi aesthetic
-            } catch(e) { console.log('Audio contextual guard applied.'); }
+                const ClassObj = window.AudioContext || window.webkitAudioContext;
+                musicCtx = new ClassObj();
+                lowpassFilter = musicCtx.createBiquadFilter();
+                lowpassFilter.type = 'lowpass';
+                lowpassFilter.frequency.setValueAtTime(290, musicCtx.currentTime); // High Luxury low filter
+            } catch(e){}
         }
 
-        function triggerSoftPianoChord(pitches, startDelay, duration, gainIntensity) {
-            if(!musicContext) return;
-            pitches.forEach(frequency => {
-                let osc = musicContext.createOscillator();
-                let amp = musicContext.createGain();
-                
-                osc.type = 'triangle'; // Pure soft piano aesthetic tone
-                osc.frequency.setValueAtTime(frequency, musicContext.currentTime + startDelay);
-                
-                amp.gain.setValueAtTime(0, musicContext.currentTime + startDelay);
-                amp.gain.linearRampToValueAtTime(gainIntensity / pitches.length, musicContext.currentTime + startDelay + 0.8);
-                amp.gain.exponentialRampToValueAtTime(0.0001, musicContext.currentTime + startDelay + duration);
-                
-                osc.connect(amp);
-                amp.connect(warmLowpass);
-                warmLowpass.connect(musicContext.destination);
-                
-                osc.start(musicContext.currentTime + startDelay);
-                osc.stop(musicContext.currentTime + startDelay + duration);
+        function triggerSoftPianoChord(frequencies, delay, len, gainVal) {
+            if(!musicCtx) return;
+            frequencies.forEach(pitch => {
+                let osc = musicCtx.createOscillator(); let amp = musicCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(pitch, musicCtx.currentTime + delay);
+                amp.gain.setValueAtTime(0, musicCtx.currentTime + delay);
+                amp.gain.linearRampToValueAtTime(gainVal / frequencies.length, musicCtx.currentTime + delay + 0.9);
+                amp.gain.exponentialRampToValueAtTime(0.0001, musicCtx.currentTime + delay + len);
+                osc.connect(amp); amp.connect(lowpassFilter); lowpassFilter.connect(musicCtx.destination);
+                osc.start(musicCtx.currentTime + delay); osc.stop(musicCtx.currentTime + delay + len);
             });
         }
 
-        function loopLofiChords() {
-            if(!audioActive) return;
-            // High-End Luxury Slow Piano Melodic Progressions
-            triggerSoftPianoChord([174.61, 220.00, 261.63, 329.63], 0.0, 5.0, 0.16); // Fmaj7 Slow Note
-            triggerSoftPianoChord([196.00, 246.94, 293.66, 392.00], 5.5, 5.0, 0.14); // Gmaj7 Dream
-            progressionLoop = setTimeout(loopLofiChords, 11000);
+        function audioLoop() {
+            if(!isAudioRunning) return;
+            triggerSoftPianoChord([174.61, 220.00, 261.63, 329.63], 0.0, 5.5, 0.18); 
+            triggerSoftPianoChord([196.00, 246.94, 293.66, 392.00], 6.0, 5.5, 0.15); 
+            loopTracker = setTimeout(audioLoop, 12000);
         }
 
-        function launchBackgroundScore() {
-            if(audioActive) return;
-            if(!musicContext) initializeAudioSystem();
-            if(musicContext && musicContext.state === 'suspended') musicContext.resume();
-            
-            audioActive = true;
+        function bootUpAudio() {
+            if(isAudioRunning) return;
+            if(!musicCtx) prepareAudioSystem();
+            if(musicCtx && musicCtx.state === 'suspended') musicCtx.resume();
+            isAudioRunning = true;
             document.getElementById('playbackBtn').style.display = 'flex';
-            loopLofiChords();
+            audioLoop();
         }
 
         document.getElementById('playbackBtn').addEventListener('click', () => {
-            if(musicContext) {
-                if(musicContext.state === 'running') { musicContext.suspend(); document.getElementById('playbackBtn').style.opacity = 0.3; }
-                else { musicContext.resume(); document.getElementById('playbackBtn').style.opacity = 1; }
+            if(musicCtx) {
+                if(musicCtx.state === 'running') { musicCtx.suspend(); document.getElementById('playbackBtn').style.opacity = 0.3; }
+                else { musicCtx.resume(); document.getElementById('playbackBtn').style.opacity = 1; }
             }
         });
     </script>
@@ -504,221 +473,239 @@
         const canvas = document.getElementById('cinemaUniverse');
         const ctx = canvas.getContext('2d');
 
-        let continuousGrid = [];
-        let kineticSparks = [];
-        let backgroundStyleMode = 1; // Transitions context per page route
+        let dynamicBackgroundArray = [];
+        let particlesPool = [];
+        let systemMode = 1; 
+        let runHeartbeatPulse = false; 
+        let pulseScale = 1; 
+        let pulseGrowth = true;
 
-        function syncCanvasDimensions() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', syncCanvasDimensions);
-        syncCanvasDimensions();
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-        class ParticleNode {
-            constructor() { this.reset(true); }
-            reset(anywhere = false) {
+        class AmbientGlitter {
+            constructor() { this.spawn(true); }
+            spawn(anywhere) {
                 this.x = Math.random() * canvas.width;
                 this.y = anywhere ? (Math.random() * canvas.height) : (canvas.height + 15);
-                this.size = Math.random() * 2 + 0.8;
-                this.velY = Math.random() * 0.3 + 0.1;
-                this.velX = Math.sin(Math.random() * 5) * 0.2;
-                this.alpha = Math.random() * 0.4 + 0.1;
+                this.size = Math.random() * 2 + 0.6;
+                this.speedY = Math.random() * 0.25 + 0.08;
+                this.alpha = Math.random() * 0.3 + 0.1;
             }
             update() {
-                this.y -= this.velY;
-                this.x += this.velX;
-                if(this.y < -10) this.reset(false);
+                this.y -= this.speedY;
+                if(this.y < -10) this.spawn(false);
             }
             draw() {
                 ctx.beginPath();
-                if(backgroundStyleMode === 1) {
-                    // Dark Luxury Crimson Crimson Shards
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-                    ctx.fillStyle = `rgba(230, 42, 62, ${this.alpha})`;
-                } else if(backgroundStyleMode === 2) {
-                    // Rose Gold Glitter Fog
-                    ctx.rect(this.x, this.y, this.size * 1.5, this.size * 1.5);
-                    ctx.fillStyle = `rgba(243, 175, 183, ${this.alpha * 0.8})`;
-                } else {
-                    // Cinematic Dark Ash Smoke
-                    ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI*2);
-                    ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha * 0.3})`;
-                }
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+                ctx.fillStyle = systemMode === 2 ? `rgba(243, 175, 183, ${this.alpha})` : `rgba(230, 42, 62, ${this.alpha})`;
                 ctx.fill();
             }
         }
 
-        class DynamicExplosionShard {
-            constructor(ex, ey, vectorType) {
-                this.x = ex; this.y = ey;
-                this.type = vectorType;
+        class CustomParticleShard {
+            constructor(x, y, variant) {
+                this.x = x; this.y = y;
+                this.variant = variant; // 'sparkle', 'wave', 'beam'
                 this.angle = Math.random() * Math.PI * 2;
-                this.velocity = Math.random() * 10 + 5;
-                this.life = 1;
-                this.decay = Math.random() * 0.02 + 0.01;
-                this.colorPool = ['#e62a3e', '#f3afb7', '#ffffff', '#5c0c13'];
-                this.shardColor = this.colorPool[Math.floor(Math.random() * this.colorPool.length)];
-                this.radius = Math.random() * 6 + 2;
+                this.alpha = 1;
+                
+                if(variant === 'sparkle') {
+                    this.speed = Math.random() * 7 + 4;
+                    this.decay = Math.random() * 0.02 + 0.015;
+                    this.color = '#ffffff';
+                    this.size = Math.random() * 5 + 2;
+                } else if(variant === 'wave') {
+                    this.speed = Math.random() * 11 + 6;
+                    this.decay = Math.random() * 0.015 + 0.01;
+                    this.color = Math.random() > 0.5 ? '#e62a3e' : '#1f0508';
+                    this.size = Math.random() * 8 + 4;
+                } else { // beam (for sliders)
+                    this.speed = Math.random() * 15 + 8;
+                    this.decay = Math.random() * 0.025 + 0.018;
+                    this.color = '#f3afb7';
+                    this.size = Math.random() * 4 + 2;
+                }
             }
             update() {
-                this.x += Math.cos(this.angle) * this.velocity;
-                this.y += Math.sin(this.angle) * this.velocity;
-                this.velocity *= 0.94;
-                this.life -= this.decay;
+                this.x += Math.cos(this.angle) * this.speed;
+                this.y += Math.sin(this.angle) * this.speed;
+                this.speed *= 0.94;
+                this.alpha -= this.decay;
             }
             draw() {
                 ctx.save();
-                ctx.globalAlpha = this.life;
+                ctx.globalAlpha = this.alpha;
                 ctx.beginPath();
-                if(this.type === 1) {
-                    // Perfect Diamond Sparkle Crystals
-                    ctx.moveTo(this.x, this.y - this.radius);
-                    ctx.lineTo(this.x + this.radius, this.y);
-                    ctx.lineTo(this.x, this.y + this.radius);
-                    ctx.lineTo(this.x - this.radius, this.y);
-                } else if(this.type === 2) {
-                    // Spherical Luxury Shards
-                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+                if(this.variant === 'sparkle') {
+                    // Star Diamond Vectors
+                    ctx.moveTo(this.x, this.y - this.size);
+                    ctx.lineTo(this.x + this.size, this.y);
+                    ctx.lineTo(this.x, this.y + this.size);
+                    ctx.lineTo(this.x - this.size, this.y);
+                } else if(this.variant === 'wave') {
+                    // Velvet Petal Circles
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
                 } else {
-                    // Micro Hearts Vectors
-                    let r = this.radius * 1.5;
-                    ctx.translate(this.x, this.y);
-                    ctx.moveTo(0, -r/4);
-                    ctx.bezierCurveTo(-r/2, -r, -r, -r/3, -r, 0);
-                    ctx.bezierCurveTo(-r, r/3, -r/3, r*2/3, 0, r);
-                    ctx.bezierCurveTo(r/3, r*2/3, r, r/3, r, 0);
-                    ctx.bezierCurveTo(r, -r/3, r/2, -r, 0, -r/4);
+                    // Gold Dust Squares
+                    ctx.rect(this.x, this.y, this.size*1.5, this.size*1.5);
                 }
-                ctx.fillStyle = this.shardColor;
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = this.shardColor;
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
                 ctx.fill();
                 ctx.restore();
             }
         }
 
-        // Init base system loops
-        for(let idx=0; idx < 45; idx++) { continuousGrid.push(new ParticleNode()); }
+        for(let i=0; i<40; i++) { dynamicBackgroundArray.push(new AmbientGlitter()); }
 
-        function runMainCanvasLoop() {
-            ctx.fillStyle = 'rgba(7, 2, 3, 0.3)'; // Cinematic premium frames transition tail
-            ctx.fillRect(0,0, canvas.width, canvas.height);
+        // Render Final Heartbeat Pulse Architecture
+        function drawFullscreenHeartbeat() {
+            if(!runHeartbeatPulse) return;
+            
+            // Continuous scale controller logic
+            if(pulseGrowth) { pulseScale += 0.006; if(pulseScale >= 1.15) pulseGrowth = false; }
+            else { pulseScale -= 0.006; if(pulseScale <= 0.95) pulseGrowth = true; }
 
-            continuousGrid.forEach(node => { node.update(); node.draw(); });
-
-            for (let i = kineticSparks.length - 1; i >= 0; i--) {
-                kineticSparks[i].update();
-                kineticSparks[i].draw();
-                if(kineticSparks[i].life <= 0) kineticSparks.splice(i, 1);
-            }
-            requestAnimationFrame(runMainCanvasLoop);
+            ctx.save();
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+            ctx.scale(pulseScale, pulseScale);
+            
+            let hr = Math.min(canvas.width, canvas.height) * 0.22;
+            ctx.beginPath();
+            ctx.moveTo(0, -hr/4);
+            ctx.bezierCurveTo(-hr/2, -hr, -hr, -hr/3, -hr, 0);
+            ctx.bezierCurveTo(-hr, hr/3, -hr/3, hr*2/3, 0, hr);
+            ctx.bezierCurveTo(hr/3, hr*2/3, hr, hr/3, hr, 0);
+            ctx.bezierCurveTo(hr, -hr/3, hr/2, -hr, 0, -hr/4);
+            
+            ctx.fillStyle = 'rgba(230, 42, 62, 0.05)';
+            ctx.strokeStyle = 'rgba(230, 42, 62, 0.35)';
+            ctx.lineWidth = 3;
+            ctx.shadowBlur = 40;
+            ctx.shadowColor = '#e62a3e';
+            ctx.fill();
+            ctx.stroke();
+            ctx.restore();
         }
-        requestAnimationFrame(runMainCanvasLoop);
+
+        function canvasAnimationLoop() {
+            ctx.fillStyle = 'rgba(7, 2, 3, 0.35)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            dynamicBackgroundArray.forEach(p => { p.update(); p.draw(); });
+
+            for (let i = particlesPool.length - 1; i >= 0; i--) {
+                particlesPool[i].update();
+                particlesPool[i].draw();
+                if(particlesPool[i].alpha <= 0) particlesPool.splice(i, 1);
+            }
+
+            drawFullscreenHeartbeat();
+            requestAnimationFrame(canvasAnimationLoop);
+        }
+        requestAnimationFrame(canvasAnimationLoop);
     </script>
 
     <script>
-        const structuralProse = "Varsha, sach bataoon toh jab se tum meri life me aayi ho na, bohot saari cheezein badal gayi hain. Tumhare sath rehna, tumse baaten karna mujhe sach me bohot accha lagta hai. Tum mere liye sirf ek special person nahi ho, balki tum wo insaan ho jiske sath main bina soche jaisa hoon, waisa reh sakta hoon...";
+        const freshNaturalProse = "Varsha, sach bataoon toh jab se tum meri life me aayi ho na, bohot saari cheezein badal gayi hain. Tumhare sath rehna, tumse baaten karna mujhe sach me bohot accha lagta hai. Tum mere liye sirf ek special person nahi ho, balki tum wo insaan ho jiske sath main bina soche jaisa hoon, waisa reh sakta hoon...";
 
         function verifyIdentity() {
-            const clientInput = document.getElementById('accessGate').value.trim();
-            if(clientInput === 'Varsha') {
-                launchBackgroundScore();
-                navigateToScene(1);
-                setTimeout(startTypewriterSequence, 600);
+            const val = document.getElementById('accessGate').value.trim();
+            if(val === 'Varsha') {
+                bootUpAudio();
+                changeScene(1);
+                setTimeout(fireTypewriter, 600);
             } else {
-                const notice = document.getElementById('errorPrompt');
-                notice.classList.add('show');
-                setTimeout(() => notice.classList.remove('show'), 3500);
+                const alertBox = document.getElementById('errorPrompt');
+                alertBox.classList.add('show');
+                setTimeout(() => alertBox.classList.remove('show'), 3500);
             }
         }
 
-        function navigateToScene(sceneId) {
-            const sceneNodes = document.querySelectorAll('.scene');
-            sceneNodes.forEach(node => node.classList.remove('active'));
+        function changeScene(sceneIdx) {
+            const nodes = document.querySelectorAll('.scene');
+            nodes.forEach(n => n.classList.remove('active'));
+            systemMode = sceneIdx % 2 + 1;
             
-            // Randomly transform theme context arrays dynamically based on navigation index route
-            backgroundStyleMode = sceneId % 3 + 1;
+            // Last page setup trigger heartbeat pulse completely
+            if(sceneIdx === 9) { runHeartbeatPulse = true; }
 
-            setTimeout(() => {
-                sceneNodes[sceneId].classList.add('active');
-            }, 100);
+            setTimeout(() => { nodes[sceneIdx].classList.add('active'); }, 100);
         }
 
-        function triggerExplosionSequence(nextTargetId, particleStyle, clickEvent) {
-            let cx = clickEvent ? clickEvent.clientX : window.innerWidth / 2;
-            let cy = clickEvent ? clickEvent.clientY : window.innerHeight / 2;
+        function triggerExplosionSequence(targetIdx, visualStyle, event) {
+            let cx = event && event.clientX ? event.clientX : window.innerWidth / 2;
+            let cy = event && event.clientY ? event.clientY : window.innerHeight / 2;
 
-            // Spawn explosive kinetics instantly
-            for(let blastCount=0; blastCount < 100; blastCount++) {
-                kineticSparks.push(new DynamicExplosionShard(cx, cy, particleStyle));
+            for(let count=0; count<80; count++) {
+                particlesPool.push(new CustomParticleShard(cx, cy, visualStyle));
             }
-
-            setTimeout(() => {
-                navigateToScene(nextTargetId);
-            }, 300);
+            setTimeout(() => { changeScene(targetIdx); }, 300);
         }
 
-        function startTypewriterSequence() {
-            const terminal = document.getElementById('typewriterTarget');
-            let charIndex = 0;
-            terminal.innerHTML = "";
+        function fireTypewriter() {
+            const container = document.getElementById('typewriterTarget');
+            let pointer = 0; container.innerHTML = "";
             
-            function printNextChar() {
-                if(charIndex < structuralProse.length) {
-                    terminal.innerHTML += structuralProse.charAt(charIndex);
-                    charIndex++;
-                    let parsedDelay = structuralProse.charAt(charIndex-1) === '.' ? 350 : 25;
-                    setTimeout(printNextChar, parsedDelay);
+            function print() {
+                if(pointer < freshNaturalProse.length) {
+                    container.innerHTML += freshNaturalProse.charAt(pointer);
+                    pointer++;
+                    let d = freshNaturalProse.charAt(pointer-1) === '.' ? 350 : 25;
+                    setTimeout(print, d);
                 }
             }
-            printNextChar();
+            print();
         }
 
-        // Complex Swiping Controller Mechanics for Premium Controls
-        function bindSliderEngine(knobId, trackId, completeTargetScene) {
-            const knob = document.getElementById(knobId);
+        // Hyper-Accurate Slider Physics Core (100% Locked Path Verification)
+        function registerSliderComponent(handleId, trackId, targetSceneIdx) {
+            const knob = document.getElementById(handleId);
             const track = document.getElementById(trackId);
-            let activeDrag = false;
-            let currentX = 0;
+            let active = false; let startX = 0;
 
-            function dragStart(e) {
-                activeDrag = true;
-                currentX = (e.type === "touchstart") ? e.touches[0].clientX : e.clientX;
+            function start(e) {
+                active = true;
+                startX = (e.type === "touchstart") ? e.touches[0].clientX : e.clientX;
             }
 
-            function dragMove(e) {
-                if(!activeDrag) return;
-                let clientX = (e.type === "touchmove") ? e.touches[0].clientX : e.clientX;
-                let boundingBox = track.getBoundingClientRect();
-                let relativePosition = clientX - boundingBox.left - 20;
+            function move(e) {
+                if(!active) return;
+                let currentX = (e.type === "touchmove") ? e.touches[0].clientX : e.clientX;
+                let trackBox = track.getBoundingClientRect();
+                let computedOffset = currentX - trackBox.left - 22;
 
-                if(relativePosition < 0) relativePosition = 0;
-                let limits = boundingBox.width - 44;
-                if(relativePosition > limits) relativePosition = limits;
+                if(computedOffset < 0) computedOffset = 0;
+                let dynamicLimit = trackBox.width - 46;
+                if(computedOffset > dynamicLimit) computedOffset = dynamicLimit;
 
-                knob.style.transform = `translateX(${relativePosition}px)`;
+                knob.style.transform = `translateX(${computedOffset}px)`;
 
-                if(relativePosition >= limits - 5) {
-                    activeDrag = false;
+                // Strict checkpoint criteria (Requires 95%+ complete path navigation)
+                if(computedOffset >= dynamicLimit - 4) {
+                    active = false;
                     knob.style.transform = `translateX(0px)`;
-                    triggerExplosionSequence(completeTargetScene, 2, e);
+                    triggerExplosionSequence(targetSceneIdx, 'beam', e);
                 }
             }
 
-            function dragEnd() { activeDrag = false; knob.style.transform = `translateX(0px)`; }
+            function end() { active = false; knob.style.transform = `translateX(0px)`; }
 
-            knob.addEventListener('mousedown', dragStart);
-            knob.addEventListener('touchstart', dragStart);
-            window.addEventListener('mousemove', dragMove);
-            window.addEventListener('touchmove', dragMove);
-            window.addEventListener('mouseup', dragEnd);
-            window.addEventListener('touchend', dragEnd);
+            knob.addEventListener('mousedown', start);
+            knob.addEventListener('touchstart', start);
+            window.addEventListener('mousemove', move);
+            window.addEventListener('touchmove', move);
+            window.addEventListener('mouseup', end);
+            window.addEventListener('touchend', end);
         }
 
-        // Initialize drag modules dynamically
-        bindSliderEngine('sliderKnob1', 'sliderContainer1', 4);
-        bindSliderEngine('sliderKnob2', 'sliderContainer2', 7);
+        // Initialize high fidelity tracks
+        registerSliderComponent('sliderKnob1', 'sliderContainer1', 4);
+        registerSliderComponent('sliderKnob2', 'sliderContainer2', 7);
 
         document.getElementById('accessGate').addEventListener('keypress', (e) => {
             if(e.key === 'Enter') verifyIdentity();
